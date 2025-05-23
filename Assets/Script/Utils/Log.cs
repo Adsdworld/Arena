@@ -6,11 +6,11 @@ using System;
 using System.IO;
 using System.Runtime.CompilerServices;
 
-namespace Utilitaire
+namespace Utils
 {
     public static class Log
     {
-        private static readonly string logFilePath = Path.Combine(Application.persistentDataPath, "game_log.txt");
+        private static readonly string logFilePath = Path.Combine(Application.persistentDataPath, "arena.log.txt");
 
         // Thread-safe queue pour stocker les logs
         private static readonly ConcurrentQueue<string> logQueue = new ConcurrentQueue<string>();
