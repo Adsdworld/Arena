@@ -2,8 +2,19 @@ namespace Script.Game.Player
 {
     public enum ActionEnum
     {
+        /// <summary>
+        /// Require uuid
+        /// </summary>
         Login,
+        
+        /// <summary>
+        /// Require gameName
+        /// </summary>
         CreateGame,
+        
+        /// <summary>
+        /// Require gameName, uuid
+        /// </summary>
         Join,
     }
 

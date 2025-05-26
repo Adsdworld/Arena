@@ -3,7 +3,8 @@ using Script.Game;
 using Script.Game.Player;
 using UnityEngine;
 using Newtonsoft.Json;
-
+using Script.Game.Core;
+using Script.Utils;
 
 
 namespace Script.Network.Message
@@ -14,31 +15,50 @@ namespace Script.Network.Message
     [Serializable]
     public class Message
     {
-        [SerializeField] private string _uuid;
-        [SerializeField] [NonSerialized] private ActionEnum _action;
-        [SerializeField] [NonSerialized] private GameNameEnum _gameName;
+        [JsonProperty("_uuid")]
+        private string _uuid;
         
+        [NonSerialized] private ActionEnum _action;
         [JsonProperty("_action")]
         public string Action => _action.GetAction();  // Converti enum → string au moment de la sérialisation
 
+        [NonSerialized] private GameNameEnum _gameName;
         [JsonProperty("_gameName")]
         public string GameNameEnum => _gameName.GetGameName();  // Pareil
         
-        [SerializeField] private string _ability;
-        [SerializeField] private float? _x;
-        [SerializeField] private float? _z;
+        [JsonProperty("_ability")]
+        private string _ability;
         
+        [JsonProperty("_x")]
+        private float? _x;
+        
+        [JsonProperty("_z")]
+        private float? _z;
+        
+        [JsonProperty("_timestamp")]
+        private long _timestamp;
+
+        
+        /// <summary>
+        /// uuid is send by default, it is used to identify the player.
+        /// </summary>
         public void Send()
         {
+            _uuid = UuidManager.GetUuid();
+            _timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            Log.Info(_timestamp.ToString());
             MessageService.MessageSender?.SendMessage(this);
         }
         
         /*
          * Getters and Setters
          */
+        /// <summary>
+        /// Prefer UuidManager.GetUuid() instead of this method
+        /// </summary>
         public string GetUuid()
         {
-            return _uuid;
+            throw new Exception("Use UuidManager.GetUuid() instead of this method message.GetUuid().");
         }
         public void SetUuid(string uuid)
         {

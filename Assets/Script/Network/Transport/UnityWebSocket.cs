@@ -51,10 +51,8 @@ namespace Script.Network.Transport
             MainThreadDispatcher.Enqueue(() =>
             {
                 Message.Message message = new Message.Message();
-                message.SetUuid(UuidManager.GetUuid());
                 message.SetAction(ActionEnum.Login);
-                Log.Info(message.ToString());
-                
+                message.SetUuid(UuidManager.GetUuid());
                 message.Send();
 
             });
@@ -78,8 +76,6 @@ namespace Script.Network.Transport
 
         public static void SendMessage(Message.Message msg)
         {
-            Log.Info("Tentative d'envoi d'un message au serveur...");
-            
             if (Instance == null)
             {
                 Log.Warn("Tentative d'envoi alors que le client WebSocket n'est pas initialisé.");
