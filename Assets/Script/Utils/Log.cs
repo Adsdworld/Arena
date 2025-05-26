@@ -6,19 +6,22 @@ using System;
 using System.IO;
 using System.Runtime.CompilerServices;
 
-namespace Utils
+namespace Script.Utils
 {
     public static class Log
     {
+        // ignore warning : Name 'logFilePath' does not match rule 'Static readonly fields (private)'. Suggested name is 'LOGFilePath'.
         private static readonly string logFilePath = Path.Combine(Application.persistentDataPath, "arena.log.txt");
 
         // Thread-safe queue pour stocker les logs
+        // ignore warning : Name 'logQueue' does not match rule 'Static readonly fields (private)'. Suggested name is 'LOGQueue'.
         private static readonly ConcurrentQueue<string> logQueue = new ConcurrentQueue<string>();
 
         // Semaphore pour contrôler l’écriture
+        // ignore warning : Name 'logSemaphore' does not match rule 'Static readonly fields (private)'. Suggested name is 'LOGSemaphore'.
         private static readonly SemaphoreSlim logSemaphore = new SemaphoreSlim(1, 1);
 
-        private static bool isWriting = false;
+        private static bool _isWriting;
 
         public static void Info(string message,
             [CallerFilePath] string file = "",
@@ -39,6 +42,13 @@ namespace Utils
             [CallerMemberName] string method = "")
         {
             EnqueueLog("failure", message, file, method);
+        }
+        
+        public static void Error(string message,
+            [CallerFilePath] string file = "",
+            [CallerMemberName] string method = "")
+        {
+            EnqueueLog("error", message, file, method);
         }
 
         private static void EnqueueLog(string level, string message, string file, string method)
@@ -65,7 +75,7 @@ namespace Utils
             logQueue.Enqueue(formatted);
 
             // Démarrer la tâche d’écriture si elle n’est pas déjà lancée
-            if (!isWriting)
+            if (!_isWriting)
             {
                 Task.Run(() => ProcessLogQueue());
             }
@@ -73,7 +83,7 @@ namespace Utils
 
         private static async Task ProcessLogQueue()
         {
-            isWriting = true;
+            _isWriting = true;
 
             while (logQueue.TryDequeue(out var logEntry))
             {
@@ -81,11 +91,11 @@ namespace Utils
                 try
                 {
                     var directory = Path.GetDirectoryName(logFilePath);
-                    if (!Directory.Exists(directory))
+                    if (!Directory.Exists(directory) && directory != null)
                     {
                         Debug.LogWarning($"Log directory does not exist: {directory}");
                         Directory.CreateDirectory(directory);
-                        Info("Log directory created.", nameof(Log), nameof(ProcessLogQueue));
+                        Info("Log directory created.");
                     }
                     File.AppendAllText(logFilePath, logEntry + Environment.NewLine);
                 }
@@ -99,7 +109,7 @@ namespace Utils
                 }
             }
 
-            isWriting = false;
+            _isWriting = false;
         }
     }
 }
