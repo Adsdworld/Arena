@@ -1,0 +1,59 @@
+:root {
+}
+
+.server {
+    background-image: url("server.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.server-button {
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    unity-font-style: bold;
+    color: white;
+    transition: background-color 200ms ease, transform 100ms ease;
+    background-color: rgb(85, 85, 85);
+    border: none;
+    unity-text-align: middle-center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+    /* Margin top and bottom */
+    margin-top: 8px;
+    margin-bottom: 8px;
+
+    /* Button shrinks to fit text content */
+    width: auto;
+    min-width: 0; /* Optional: avoid Unity's default min-width */
+    flex-shrink: 1;
+}
+
+.server-button:active {
+    transform: scale(1.05);
+}
+
+.open-server {
+    background-color: rgb(76, 175, 80);
+}
+
+.open-server:hover {
+    background-color: rgb(69, 160, 73);
+}
+
+.close-server {
+    background-color: rgb(244, 67, 54);
+}
+
+.close-server:hover {
+    background-color: rgb(211, 47, 47);
+}
+
+.join-server {
+    background-color: rgb(33, 150, 243);
+}
+
+.join-server:hover {
+    background-color: rgb(25, 118, 210);
+}
