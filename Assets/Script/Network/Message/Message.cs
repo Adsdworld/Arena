@@ -46,7 +46,6 @@ namespace Script.Network.Message
         {
             _uuid = UuidManager.GetUuid();
             _timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-            Log.Info(_timestamp.ToString());
             MessageService.MessageSender?.SendMessage(this);
         }
         

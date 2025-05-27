@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Script.Utils;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Script.Ui
@@ -8,22 +9,23 @@ namespace Script.Ui
         public GameObject menuUI; // Le panneau UI à activer/désactiver
         public bool isVisible;
 
-        public InputSystem_Actions inputActions;
+        private InputSystem_Actions controls;
 
         private void Awake()
         {
-            inputActions = new PlayerInputActions();
-            inputActions.UI.ToggleMenu.performed += OnToggleMenu;
+            controls = new InputSystem_Actions();
+            controls.Player.Interact.performed += OnToggleMenu;
         }
 
         private void OnEnable()
         {
-            inputActions.UI.Enable();
+            Log.Info("Enabling UI controls");
+            controls.UI.Enable();
         }
 
         private void OnDisable()
         {
-            inputActions.UI.Disable();
+            controls.UI.Disable();
         }
 
         private void Start()
@@ -37,8 +39,18 @@ namespace Script.Ui
 
         private void OnToggleMenu(InputAction.CallbackContext context)
         {
+            Log.Info("ToggleMenu action performed");
             isVisible = !isVisible;
             menuUI.SetActive(isVisible);
         }
+        
+        void Update()
+        {
+            if (Keyboard.current.escapeKey.wasPressedThisFrame)
+            {
+                Debug.Log("Escape key detected in Update()");
+            }
+        }
+
     }
 }
