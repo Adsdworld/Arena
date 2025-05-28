@@ -2,32 +2,35 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class BasicControls : MonoBehaviour
+namespace Script.Input.Controls
 {
-    public bool isPress;
-    
-    private InputSystem_Actions controls;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class BasicControls : MonoBehaviour
     {
-        isPress = false;
-    }
-
-    private void Awake()
-    {
-        controls = new InputSystem_Actions();
-        controls.Player.Interact.performed += OnInteract;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        private InputSystem_Actions inputActions;
         
-    }
-
-    private void OnInteract(InputAction.CallbackContext context)
-    {
-        isPress = !isPress;
+        private void Awake()
+        {
+            inputActions = new InputSystem_Actions();
+            inputActions.Player.Clic.performed += OnAction;
+        }
+        
+        private void OnEnable()
+        {
+            inputActions?.Enable();
+        }
+        
+        private void OnDisable()
+        {
+            inputActions?.Disable();
+        }
+        
+        private void OnAction(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                Debug.Log("Action performed!");
+            }
+        }
+        
     }
 }

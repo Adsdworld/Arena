@@ -14,18 +14,17 @@ namespace Script.Ui
         private void Awake()
         {
             controls = new InputSystem_Actions();
-            controls.Player.Interact.performed += OnToggleMenu;
+            controls.ServerSelector.ToggleMenu.performed += OnToggleMenu;
         }
 
         private void OnEnable()
         {
-            Log.Info("Enabling UI controls");
-            controls.UI.Enable();
+            controls.ServerSelector.Enable();
         }
 
         private void OnDisable()
         {
-            controls.UI.Disable();
+            controls.ServerSelector.Disable();
         }
 
         private void Start()
@@ -39,18 +38,8 @@ namespace Script.Ui
 
         private void OnToggleMenu(InputAction.CallbackContext context)
         {
-            Log.Info("ToggleMenu action performed");
             isVisible = !isVisible;
             menuUI.SetActive(isVisible);
         }
-        
-        void Update()
-        {
-            if (Keyboard.current.escapeKey.wasPressedThisFrame)
-            {
-                Debug.Log("Escape key detected in Update()");
-            }
-        }
-
     }
 }
