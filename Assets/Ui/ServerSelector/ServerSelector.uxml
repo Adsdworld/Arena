@@ -1,9 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/Ui/ServerSelector/ServerSelector.uss?fileID=7433441132597879392&amp;guid=f209c554068620048bf1a75e21486e33&amp;type=3#ServerSelector" />
-    <ui:VisualElement style="flex-grow: 1; align-self: auto;">
+    <ui:VisualElement name="Header" style="flex-grow: 1; align-self: auto;">
         <ui:TextField label="Arena" placeholder-text="filler text" enabled="false" style="align-self: center;" />
     </ui:VisualElement>
-    <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+    <ui:VisualElement name="Footer" style="flex-grow: 1; flex-direction: row;">
         <ui:VisualElement data-source-type="PlasticPipe.PlasticProtocol.Server.ServerBasedOnTcpSocket, unityplastic" name="Server1" class="server" style="flex-grow: 1; justify-content: center;">
             <ui:Button text="Open" name="Open" class="server-button open-server" style="align-items: stretch; justify-content: flex-start; align-self: center;" />
             <ui:Button text="Join" name="Join" class="server-button join-server" style="align-self: center;" />

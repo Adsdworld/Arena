@@ -56,7 +56,7 @@ namespace Script.Network.Transport
                 message.Send();
 
             });
-            Log.Info("Message de connexion envoyé.");
+            //Log.Info("Message de connexion envoyé.");
         }
 
         private void OnMessage(object sender, MessageEventArgs e)
