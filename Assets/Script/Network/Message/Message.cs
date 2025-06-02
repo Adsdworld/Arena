@@ -20,7 +20,7 @@ namespace Script.Network.Message
         
         [NonSerialized] private ActionEnum _action;
         [JsonProperty("_action")]
-        public string Action => _action.GetAction();  // Converti enum → string au moment de la sérialisation
+        public string Action => _action.GetActionName();  // Converti enum → string au moment de la sérialisation
 
         [NonSerialized] private GameNameEnum _gameName;
         [JsonProperty("_gameName")]

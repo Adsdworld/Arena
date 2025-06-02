@@ -145,7 +145,7 @@ namespace Script.Ui
 
         private void OnOpenClicked(GameNameEnum game)
         {
-            Log.Info("Opening " + game.GetGameName());
+            //Log.Info("Opening " + game.GetGameName());
             Message message = new Message();
             message.SetAction(ActionEnum.CreateGame);
             message.SetGameNameEnum(game);
@@ -154,7 +154,7 @@ namespace Script.Ui
 
         private void OnJoinClicked(GameNameEnum game)
         {
-            Log.Info("Joining " + game.GetGameName());
+            //Log.Info("Joining " + game.GetGameName());
             Message message = new Message();
             message.SetAction(ActionEnum.Join);
             message.SetGameNameEnum(game);
@@ -163,7 +163,7 @@ namespace Script.Ui
 
         private void OnCloseClicked(GameNameEnum game)
         {
-            Log.Info("Closing " + game.GetGameName());
+            //Log.Info("Closing " + game.GetGameName());
             Message message = new Message();
             message.SetAction(ActionEnum.CloseGame);
             message.SetGameNameEnum(game);

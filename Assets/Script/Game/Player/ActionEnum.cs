@@ -25,7 +25,7 @@ namespace Script.Game.Player
 
     public static class ActionEnumExtensions
     {
-        public static string GetAction(this ActionEnum actionEnum)
+        public static string GetActionName(this ActionEnum actionEnum)
         {
             return actionEnum switch
             {

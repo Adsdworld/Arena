@@ -1,11 +1,23 @@
+using Newtonsoft.Json.Converters;
+using System.Runtime.Serialization;
+
 namespace Script.Game
 {
     public enum GameNameEnum
     {
+        [EnumMember(Value = "Game 1")]
         Game1,
+        
+        [EnumMember(Value = "Game 2")]
         Game2,
+        
+        [EnumMember(Value = "Game 3")]
         Game3,
+        
+        [EnumMember(Value = "Game 4")]
         Game4,
+        
+        [EnumMember(Value = "Game 5")]
         Game5,
     }
 

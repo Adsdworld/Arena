@@ -6,6 +6,8 @@ using Script.Network.Message;
 using WebSocketSharp;
 using System;
 using Newtonsoft.Json;
+using Script.Game.handlers;
+using Script.Network.response;
 
 
 namespace Script.Network.Transport
@@ -16,7 +18,7 @@ namespace Script.Network.Transport
 
         private WebSocket _websocket;
         public Boolean production;
-
+        
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -62,7 +64,34 @@ namespace Script.Network.Transport
         private void OnMessage(object sender, MessageEventArgs e)
         {
             Log.Info("Message reçu du serveur : " + e.Data);
+
+            try
+            {
+                var response = JsonConvert.DeserializeObject<Response>(e.Data);
+                if (response == null)
+                {
+                    Log.Failure("Réponse désérialisée est null.");
+                    return;
+                }
+                
+                // Appel du handler approprié
+                ResponseHandlerManager.HandleResponse(response);
+            }
+            catch (Exception exception)
+            {
+                Log.Warn("A enum can not be found or other errors");
+                Log.Failure("Exception dans OnMessage: " + exception.Message + "\n" + exception.StackTrace);
+                throw;
+            }
         }
+        
+        // TODO: Create a validate Json for OnMessage
+        // TODO: move it to Utils
+        // TODO: improve it to
+        /**
+         * Enum not found error : enum value present in the message but not in the Java enum
+         * field not found error : field present in the message but not in the Java class
+         */
 
         private void OnError(object sender, ErrorEventArgs e)
         {
@@ -71,7 +100,7 @@ namespace Script.Network.Transport
 
         private void OnClose(object sender, CloseEventArgs e)
         {
-            Log.Info("Connexion WebSocket fermée. Code: " + e.Code + ", Raison: " + e.Reason);
+            Log.Info("Connexion WebSocket fermée. Code: " + e.Code);
         }
 
         public static void SendMessage(Message.Message msg)
