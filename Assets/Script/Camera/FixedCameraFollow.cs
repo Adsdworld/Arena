@@ -8,6 +8,8 @@ namespace Script.Camera
         public Transform target;
         public float followSpeed = 10f;
 
+        private bool LockCamera = true;
+
         public Vector3 fixedEulerAngles = new Vector3(50f, 35f, 0f);
         public Vector3 offset = new Vector3(0f, 0f, -3.5f);
 
@@ -17,10 +19,32 @@ namespace Script.Camera
         private Vector3 edgeScrollOffset = Vector3.zero;
 
         private Keyboard keyboard;
+        
+        
+        private InputSystem_Actions controls;
+
 
         void Awake()
         {
             keyboard = Keyboard.current;
+            
+            controls = new InputSystem_Actions();
+            controls.Player.LockCamera.performed += ctx => ToggleCameraLock();
+        }
+        
+        private void ToggleCameraLock()
+        {
+            LockCamera = !LockCamera;
+        }
+        
+        void OnEnable()
+        {
+            controls.Enable();
+        }
+        
+        void OnDisable()
+        {
+            controls.Disable();
         }
 
         void LateUpdate()
@@ -44,7 +68,7 @@ namespace Script.Camera
         {
             if (Mouse.current == null) return;
             
-            if (keyboard.spaceKey.isPressed)
+            if (keyboard.spaceKey.isPressed || LockCamera)
             {
                 edgeScrollOffset = Vector3.zero;
                 return;

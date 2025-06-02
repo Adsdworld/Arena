@@ -1117,6 +1117,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LockCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""36f7d4fd-f306-4508-bb7a-9771e3609e97"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1126,8 +1135,19 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Clic"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92b11897-02d8-4d02-8424-958d2835fc72"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""LockCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1226,6 +1246,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Clic = m_Player.FindAction("Clic", throwIfNotFound: true);
+        m_Player_LockCamera = m_Player.FindAction("LockCamera", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -1785,6 +1806,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Clic;
+    private readonly InputAction m_Player_LockCamera;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1800,6 +1822,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Clic".
         /// </summary>
         public InputAction @Clic => m_Wrapper.m_Player_Clic;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/LockCamera".
+        /// </summary>
+        public InputAction @LockCamera => m_Wrapper.m_Player_LockCamera;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1829,6 +1855,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Clic.started += instance.OnClic;
             @Clic.performed += instance.OnClic;
             @Clic.canceled += instance.OnClic;
+            @LockCamera.started += instance.OnLockCamera;
+            @LockCamera.performed += instance.OnLockCamera;
+            @LockCamera.canceled += instance.OnLockCamera;
         }
 
         /// <summary>
@@ -1843,6 +1872,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Clic.started -= instance.OnClic;
             @Clic.performed -= instance.OnClic;
             @Clic.canceled -= instance.OnClic;
+            @LockCamera.started -= instance.OnLockCamera;
+            @LockCamera.performed -= instance.OnLockCamera;
+            @LockCamera.canceled -= instance.OnLockCamera;
         }
 
         /// <summary>
@@ -2119,5 +2151,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnClic(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "LockCamera" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLockCamera(InputAction.CallbackContext context);
     }
 }

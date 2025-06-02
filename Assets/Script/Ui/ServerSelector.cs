@@ -1,5 +1,4 @@
-﻿using Script.Utils;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Script.Ui
