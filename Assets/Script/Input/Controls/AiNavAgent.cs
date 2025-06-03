@@ -14,7 +14,7 @@ namespace Script.Input.Controls
         private InputSystem_Actions inputActions;
 
         
-        private float _GarenMoveSpeed = 2.5f;
+        private float _GarenMoveSpeed = 7.5f;
         
         // commun à tous les champions
         private float _ChampionAcceleration = 999f;

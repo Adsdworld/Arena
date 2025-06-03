@@ -11,7 +11,7 @@ namespace Script.Camera
         private bool LockCamera = true;
 
         public Vector3 fixedEulerAngles = new Vector3(50f, 35f, 0f);
-        public Vector3 offset = new Vector3(0f, 0f, -3.5f);
+        public Vector3 offset = new Vector3(0f, 0f, -30f);
 
         public float edgeScrollSpeed = 10f;
         public float edgeScrollZonePercent = 0.10f; // ✅ 10%
