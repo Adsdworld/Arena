@@ -23,6 +23,8 @@ namespace Script.Network.response
         [JsonProperty("_text")] public string Text { get; set; }
 
         [JsonProperty("_notify")] public string Notify { get; set; }
+        
+        [JsonProperty("_livingEntities")] public int LivingEntities { get; set; }
 
         public ResponseEnum GetResponse()
         {
