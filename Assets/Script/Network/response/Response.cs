@@ -1,6 +1,8 @@
-﻿using Script.Game;
+﻿using System.Collections.Generic;
+using Script.Game;
 using Script.Game.Player;
 using Newtonsoft.Json;
+using Script.Game.Entity;
 using Script.Utils;
 
 namespace Script.Network.response
@@ -24,7 +26,7 @@ namespace Script.Network.response
 
         [JsonProperty("_notify")] public string Notify { get; set; }
         
-        [JsonProperty("_livingEntities")] public int LivingEntities { get; set; }
+        [JsonProperty("_livingEntities")] public List<LivingEntity> LivingEntities { get; set; }
 
         public ResponseEnum GetResponse()
         {
