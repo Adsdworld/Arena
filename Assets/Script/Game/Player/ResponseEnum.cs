@@ -31,6 +31,9 @@ namespace Script.Game.Player
         
         [EnumMember(Value = "Joined")]
         Joined,
+        
+        [EnumMember(Value = "Spawned")]
+        Spawned,
     }
     
     public static class ResponseEnumExtensions
@@ -47,6 +50,7 @@ namespace Script.Game.Player
                 ResponseEnum.GameClosed => "Game Closed",
                 ResponseEnum.GameNotFound => "Game Not Found",
                 ResponseEnum.Joined => "Joined",
+                ResponseEnum.Spawned => "Spawned",
                 _ => null
             };
         }

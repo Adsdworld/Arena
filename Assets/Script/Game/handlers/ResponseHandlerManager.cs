@@ -17,6 +17,7 @@ namespace Script.Game.handlers
             _handlers[ResponseEnum.GameAlreadyExists] = new GameAlreadyExists();
             _handlers[ResponseEnum.GamesLimitReached] = new GamesLimitReached();
             _handlers[ResponseEnum.GameClosed] = new GameClosed();
+            _handlers[ResponseEnum.Joined] = new Joined();
         }
 
         public static void HandleResponse(Response response)
