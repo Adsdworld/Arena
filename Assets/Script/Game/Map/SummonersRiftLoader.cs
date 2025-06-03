@@ -21,7 +21,7 @@ namespace Script.Game.Map
                 bool instantiated = await gltf.InstantiateMainSceneAsync(transform);
                 if (instantiated)
                 {
-                    transform.localScale = new Vector3(2f, 2f, 2f);
+                    transform.localScale = new Vector3(20f, 20f, 20f);
                     Log.Info("GLB summoner rift loaded and instantiated successfully.");
                 }
                 else
