@@ -5,21 +5,21 @@ namespace Script.Game.Entity
 {
     public class EntityComponent : MonoBehaviour, ILivingEntity
     {
-        private string id;
-        private string name;
-        private int health;
-        private int maxHealth;
-        private int armor;
-        private int magicResist;
-        private int attackDamage;
-        private int abilityPower;
-        private float moveSpeed;
-        private bool moving;
-        private float posX;
-        private float posZ;
-        private float posXDesired;
-        private float posZDesired;
-        private int team;
+        [SerializeField] private string id;
+        [SerializeField] private string name;
+        [SerializeField] private int health;
+        [SerializeField] private int maxHealth;
+        [SerializeField] private int armor;
+        [SerializeField] private int magicResist;
+        [SerializeField] private int attackDamage;
+        [SerializeField] private int abilityPower;
+        [SerializeField] private float moveSpeed;
+        [SerializeField] private bool moving;
+        [SerializeField] private float posX;
+        [SerializeField] private float posZ;
+        [SerializeField] private float posXDesired;
+        [SerializeField] private float posZDesired;
+        [SerializeField] private int team;
 
         public string Id { get => id; set => id = value; }
         public string Name { get => name; set => name = value; }
