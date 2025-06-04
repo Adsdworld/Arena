@@ -3,7 +3,6 @@ using Script.Game;
 using Script.Game.Player;
 using Newtonsoft.Json;
 using Script.Game.Entity;
-using Script.Utils;
 
 namespace Script.Network.response
 {

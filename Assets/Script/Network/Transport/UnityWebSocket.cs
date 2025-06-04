@@ -63,7 +63,10 @@ namespace Script.Network.Transport
 
         private void OnMessage(object sender, MessageEventArgs e)
         {
-            Log.Info("Message reçu du serveur : " + e.Data);
+            if (!e.Data.Contains("Game State")) // hide frequent Game State messages
+            {
+                Log.Info("Message reçu du serveur : " + e.Data);
+            }
 
             try
             {
