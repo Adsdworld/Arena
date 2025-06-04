@@ -53,7 +53,7 @@ namespace Script.Game.Entity
                 else
                 {
                     GameObject newGo = Instantiate(entityPrefab);
-                    newGo.name = $"Entity_{serverEntity.Name}_{serverEntity.Id}";
+                    newGo.name = $"Entity_{serverEntity.Id}";
 
                     entityGameObjects[serverEntity.Id] = newGo;
 

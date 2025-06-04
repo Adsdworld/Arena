@@ -5,21 +5,37 @@ namespace Script.Game.Entity
 {
     public class EntityComponent : MonoBehaviour, ILivingEntity
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public int Health { get; set; }
-        public int MaxHealth { get; set; }
-        public int Armor { get; set; }
-        public int MagicResist { get; set; }
-        public int AttackDamage { get; set; }
-        public int AbilityPower { get; set; }
-        public float MoveSpeed { get; set; }
-        public bool Moving { get; set; }
-        public float PosX { get; set; }
-        public float PosZ { get; set; }
-        public float PosXDesired { get; set; }
-        public float PosZDesired { get; set; }
-        public int Team { get; set; }
+        private string id;
+        private string name;
+        private int health;
+        private int maxHealth;
+        private int armor;
+        private int magicResist;
+        private int attackDamage;
+        private int abilityPower;
+        private float moveSpeed;
+        private bool moving;
+        private float posX;
+        private float posZ;
+        private float posXDesired;
+        private float posZDesired;
+        private int team;
+
+        public string Id { get => id; set => id = value; }
+        public string Name { get => name; set => name = value; }
+        public int Health { get => health; set => health = value; }
+        public int MaxHealth { get => maxHealth; set => maxHealth = value; }
+        public int Armor { get => armor; set => armor = value; }
+        public int MagicResist { get => magicResist; set => magicResist = value; }
+        public int AttackDamage { get => attackDamage; set => attackDamage = value; }
+        public int AbilityPower { get => abilityPower; set => abilityPower = value; }
+        public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
+        public bool Moving { get => moving; set => moving = value; }
+        public float PosX { get => posX; set => posX = value; }
+        public float PosZ { get => posZ; set => posZ = value; }
+        public float PosXDesired { get => posXDesired; set => posXDesired = value; }
+        public float PosZDesired { get => posZDesired; set => posZDesired = value; }
+        public int Team { get => team; set => team = value; }
 
         // Méthode pour initialiser les propriétés à partir d'une donnée ILivingEntity
         public void Initialize(ILivingEntity data)
@@ -46,7 +62,10 @@ namespace Script.Game.Entity
 
         public void UpdateFromData(LivingEntity livingEntity)
         {
-            Log.Info("Updating entity from data: " + livingEntity.Id);
+            Log.Info("@@@ Updating entity from data: " + livingEntity.Id);
+            
+            Health = livingEntity.Health;
+            
         }
     }
 }
