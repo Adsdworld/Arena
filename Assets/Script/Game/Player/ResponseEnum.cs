@@ -37,6 +37,9 @@ namespace Script.Game.Player
         
         [EnumMember(Value = "Game State")]
         GameState,
+        
+        [EnumMember(Value = "Your Entity Is")]
+        YourEntityIs,
     }
     
     public static class ResponseEnumExtensions
@@ -55,6 +58,7 @@ namespace Script.Game.Player
                 ResponseEnum.Joined => "Joined",
                 ResponseEnum.Spawned => "Spawned",
                 ResponseEnum.GameState => "Game State",
+                ResponseEnum.YourEntityIs => "Your Entity Is",
                 _ => null
             };
         }

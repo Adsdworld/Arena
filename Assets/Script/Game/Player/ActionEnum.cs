@@ -21,6 +21,13 @@ namespace Script.Game.Player
         /// Require gameName
         /// </summary>
         CloseGame,
+        
+        /// <summary>
+        /// Require gameName, uuid
+        /// </summary>
+        WhatIsMyEntity,
+        
+        
     }
 
     public static class ActionEnumExtensions
@@ -33,6 +40,7 @@ namespace Script.Game.Player
                 ActionEnum.CreateGame => "Create Game",
                 ActionEnum.Join => "Join",
                 ActionEnum.CloseGame => "Close Game",
+                ActionEnum.WhatIsMyEntity => "What Is My Entity",
                 _ => null
             };
         }

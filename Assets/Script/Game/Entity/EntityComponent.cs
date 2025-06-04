@@ -5,37 +5,37 @@ namespace Script.Game.Entity
 {
     public class EntityComponent : MonoBehaviour, ILivingEntity
     {
-        [SerializeField] private string id;
-        [SerializeField] private string name;
-        [SerializeField] private int health;
-        [SerializeField] private int maxHealth;
-        [SerializeField] private int armor;
-        [SerializeField] private int magicResist;
-        [SerializeField] private int attackDamage;
-        [SerializeField] private int abilityPower;
-        [SerializeField] private float moveSpeed;
-        [SerializeField] private bool moving;
-        [SerializeField] private float posX;
-        [SerializeField] private float posZ;
-        [SerializeField] private float posXDesired;
-        [SerializeField] private float posZDesired;
-        [SerializeField] private int team;
+        [SerializeField] private string _id;
+        [SerializeField] private string _name;
+        [SerializeField] private int _health;
+        [SerializeField] private int _maxHealth;
+        [SerializeField] private int _armor;
+        [SerializeField] private int _magicResist;
+        [SerializeField] private int _attackDamage;
+        [SerializeField] private int _abilityPower;
+        [SerializeField] private float _moveSpeed;
+        [SerializeField] private bool _moving;
+        [SerializeField] private float _posX;
+        [SerializeField] private float _posZ;
+        [SerializeField] private float _posXDesired;
+        [SerializeField] private float _posZDesired;
+        [SerializeField] private int _team;
 
-        public string Id { get => id; set => id = value; }
-        public string Name { get => name; set => name = value; }
-        public int Health { get => health; set => health = value; }
-        public int MaxHealth { get => maxHealth; set => maxHealth = value; }
-        public int Armor { get => armor; set => armor = value; }
-        public int MagicResist { get => magicResist; set => magicResist = value; }
-        public int AttackDamage { get => attackDamage; set => attackDamage = value; }
-        public int AbilityPower { get => abilityPower; set => abilityPower = value; }
-        public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
-        public bool Moving { get => moving; set => moving = value; }
-        public float PosX { get => posX; set => posX = value; }
-        public float PosZ { get => posZ; set => posZ = value; }
-        public float PosXDesired { get => posXDesired; set => posXDesired = value; }
-        public float PosZDesired { get => posZDesired; set => posZDesired = value; }
-        public int Team { get => team; set => team = value; }
+        public string Id { get => _id; set => _id = value; }
+        public string Name { get => _name; set => _name = value; }
+        public int Health { get => _health; set => _health = value; }
+        public int MaxHealth { get => _maxHealth; set => _maxHealth = value; }
+        public int Armor { get => _armor; set => _armor = value; }
+        public int MagicResist { get => _magicResist; set => _magicResist = value; }
+        public int AttackDamage { get => _attackDamage; set => _attackDamage = value; }
+        public int AbilityPower { get => _abilityPower; set => _abilityPower = value; }
+        public float MoveSpeed { get => _moveSpeed; set => _moveSpeed = value; }
+        public bool Moving { get => _moving; set => _moving = value; }
+        public float PosX { get => _posX; set => _posX = value; }
+        public float PosZ { get => _posZ; set => _posZ = value; }
+        public float PosXDesired { get => _posXDesired; set => _posXDesired = value; }
+        public float PosZDesired { get => _posZDesired; set => _posZDesired = value; }
+        public int Team { get => _team; set => _team = value; }
 
         // Méthode pour initialiser les propriétés à partir d'une donnée ILivingEntity
         public void Initialize(ILivingEntity data)
