@@ -1,5 +1,6 @@
 ﻿using System.Collections ; 
 using System.Collections.Generic;
+using Script.Game.Player;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,8 +8,8 @@ namespace Script.Ui.menu
 {
     public class Health : MonoBehaviour
     {
-        public float health = 75f; 
-        public float maxHealth = 100f; 
+        public float health; 
+        public float maxHealth; 
     
         public Image healthBar; 
     
@@ -16,6 +17,13 @@ namespace Script.Ui.menu
         // Update is called once per frame 
         void Update()
         {
+
+            var entity = LocalPlayer.Instance.GetControlledEntityComponent();
+            if (entity != null)
+            {
+                health = entity.Health;
+                maxHealth = entity.MaxHealth;
+            }
             healthBar.fillAmount = health / maxHealth;
         }
     }

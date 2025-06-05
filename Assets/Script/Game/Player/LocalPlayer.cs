@@ -1,4 +1,5 @@
 ﻿using System;
+using Script.Game.Entity;
 using UnityEngine;
 
 namespace Script.Game.Player
@@ -89,5 +90,21 @@ namespace Script.Game.Player
             return ControlledEntity;
         }
         
+        public EntityComponent GetControlledEntityComponent()
+        {
+            if (ControlledEntity == null)
+            {
+                Debug.LogWarning("ControlledEntity is null in GetControlledEntityComponent()");
+                return null;
+            }
+
+            var component = ControlledEntity.GetComponent<EntityComponent>();
+            if (component == null)
+            {
+                Debug.LogWarning("EntityComponent not found on ControlledEntity");
+            }
+
+            return component;
+        }
     }
 }
