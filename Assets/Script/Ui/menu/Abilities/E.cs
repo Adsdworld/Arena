@@ -1,30 +1,44 @@
-﻿using System.Collections ; 
-using System.Collections.Generic;
+﻿using System;
 using Script.Game.Player;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Script.Ui.menu.Abilities
-{ 
+{
     public class E : MonoBehaviour
     {
-        public float health;
-        public float maxHealth;
+        public long CooldownEStart;
+        public long CooldownEEnd;
 
         public Image EBAR;
 
-
-        // Update is called once per frame 
         void Update()
         {
-            var entity = LocalPlayer.Instance.GetControlledEntityComponent();
-            if (entity != null)
+            // --- Affichage de la barre ---
+            var controlledEntity = LocalPlayer.Instance.GetControlledEntityComponent();
+            if (controlledEntity != null)
             {
-                health = entity.Health;
-                maxHealth = entity.MaxHealth;
+                CooldownEStart = controlledEntity.CooldownEStart;
+                CooldownEEnd = controlledEntity.CooldownEEnd;
             }
 
-            EBAR.fillAmount = health / maxHealth;
+            long nowMs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+
+            if (nowMs < CooldownEStart)
+            {
+                EBAR.fillAmount = 0f;
+            }
+            else if (nowMs >= CooldownEEnd)
+            {
+                EBAR.fillAmount = 1f;
+            }
+            else
+            {
+                long duration = CooldownEEnd - CooldownEStart;
+                long elapsed = nowMs - CooldownEStart;
+                float fill = (float)elapsed / duration;
+                EBAR.fillAmount = fill;
+            }
         }
     }
 }

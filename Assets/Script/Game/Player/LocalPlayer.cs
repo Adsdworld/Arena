@@ -1,6 +1,7 @@
 ﻿using System;
 using Script.Game.Entity;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Script.Game.Player
 {
@@ -43,10 +44,58 @@ namespace Script.Game.Player
             DontDestroyOnLoad(gameObject);
         }
 
+        public void Start()
+        {
+             UpDateControlledEntity();
+        }
+
         private void Update()
         {
             UpDateControlledEntity();
-        }
+            
+            // Tester la touche Q (juste pressée)
+            if (Keyboard.current.qKey.wasPressedThisFrame)
+            {
+                long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+                var entity = LocalPlayer.Instance.GetControlledEntityComponent();
+                if (entity != null)
+                {
+                    entity.CooldownQStart = now;
+                    entity.CooldownQEnd = now + 5000; // cooldown 5s
+                }
+            }
+
+            if (Keyboard.current.wKey.wasPressedThisFrame)
+            {
+                long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+                var entity = LocalPlayer.Instance.GetControlledEntityComponent();
+                if (entity != null)
+                {
+                    entity.CooldownWStart = now;
+                    entity.CooldownWEnd = now + 5000; // cooldown 5s
+                }
+            }
+            if (Keyboard.current.eKey.wasPressedThisFrame)
+            {
+                long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+                var entity = LocalPlayer.Instance.GetControlledEntityComponent();
+                if (entity != null)
+                {
+                    entity.CooldownEStart = now;
+                    entity.CooldownEEnd = now + 5000; // cooldown 5s
+                }
+            }
+            if (Keyboard.current.rKey.wasPressedThisFrame)
+            {
+                long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+                var entity = LocalPlayer.Instance.GetControlledEntityComponent();
+                if (entity != null)
+                {
+                    entity.CooldownRStart = now;
+                    entity.CooldownREnd = now + 5000; // cooldown 5s
+                }
+            }
+         }
         
         private void UpDateControlledEntity()
         {

@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 namespace Script.Ui.menu.Abilities
 {
-    public class R : MonoBehaviour
+    public class W : MonoBehaviour
     {
-        public long CooldownRStart;
-        public long CooldownREnd;
+        public long CooldownWStart;
+        public long CooldownWEnd;
 
-        public Image RBAR;
+        public Image WBAR;
 
         void Update()
         {
@@ -18,26 +18,26 @@ namespace Script.Ui.menu.Abilities
             var controlledEntity = LocalPlayer.Instance.GetControlledEntityComponent();
             if (controlledEntity != null)
             {
-                CooldownRStart = controlledEntity.CooldownRStart;
-                CooldownREnd = controlledEntity.CooldownREnd;
+                CooldownWStart = controlledEntity.CooldownWStart;
+                CooldownWEnd = controlledEntity.CooldownWEnd;
             }
 
             long nowMs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
 
-            if (nowMs < CooldownRStart)
+            if (nowMs < CooldownWStart)
             {
-                RBAR.fillAmount = 0f;
+                WBAR.fillAmount = 0f;
             }
-            else if (nowMs >= CooldownREnd)
+            else if (nowMs >= CooldownWEnd)
             {
-                RBAR.fillAmount = 1f;
+                WBAR.fillAmount = 1f;
             }
             else
             {
-                long duration = CooldownREnd - CooldownRStart;
-                long elapsed = nowMs - CooldownRStart;
+                long duration = CooldownWEnd - CooldownWStart;
+                long elapsed = nowMs - CooldownWStart;
                 float fill = (float)elapsed / duration;
-                RBAR.fillAmount = fill;
+                WBAR.fillAmount = fill;
             }
         }
     }

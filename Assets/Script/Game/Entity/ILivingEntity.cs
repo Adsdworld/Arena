@@ -16,6 +16,15 @@
         float PosZ { get; set; }
         float PosXDesired { get; set; }
         float PosZDesired { get; set; }
+        float Rotation { get; set; }
         int Team { get; set; }
+        long CooldownQStart { get; set; }
+        long CooldownWStart { get; set; }
+        long CooldownEStart { get; set; }
+        long CooldownRStart { get; set; }
+        long CooldownQEnd { get; set; }
+        long CooldownWEnd { get; set; }
+        long CooldownEEnd { get; set; }
+        long CooldownREnd { get; set; }
     }
 }

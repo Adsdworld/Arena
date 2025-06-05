@@ -50,13 +50,22 @@ namespace Script.Game.Entity
         [JsonProperty("team")]
         public int Team { get; set; }
         
-        [JsonProperty("cooldownQ")]
-        public float CooldownQ { get; set; }
-        [JsonProperty("cooldownW")]
-        public float CooldownW { get; set; }
-        [JsonProperty("cooldownE")]
-        public float CooldownE { get; set; }
-        [JsonProperty("cooldownR")]
-        public float CooldownR { get; set; }
+        [JsonProperty("cooldownQStart")]
+        public long CooldownQStart { get; set; }
+        [JsonProperty("cooldownWStart")]
+        public long CooldownWStart { get; set; }
+        [JsonProperty("cooldownEStart")]
+        public long CooldownEStart { get; set; }
+        [JsonProperty("cooldownRStart")]
+        public long CooldownRStart { get; set; }
+        
+        [JsonProperty("cooldownQEnd")]
+        public long CooldownQEnd { get; set; }
+        [JsonProperty("cooldownWEnd")]
+        public long CooldownWEnd { get; set; }
+        [JsonProperty("cooldownEEnd")]
+        public long CooldownEEnd { get; set; }
+        [JsonProperty("cooldownREnd")]
+        public long CooldownREnd { get; set; }
     }
 }

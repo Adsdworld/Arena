@@ -19,7 +19,16 @@ namespace Script.Game.Entity
         [SerializeField] private float _posZ;
         [SerializeField] private float _posXDesired;
         [SerializeField] private float _posZDesired;
+        [SerializeField] private float _rotation;
         [SerializeField] private int _team;
+        [SerializeField] private long _cooldownQStart;
+        [SerializeField] private long _cooldownWStart;
+        [SerializeField] private long _cooldownEStart;
+        [SerializeField] private long _cooldownRStart;
+        [SerializeField] private long _cooldownQEnd;
+        [SerializeField] private long _cooldownWEnd;
+        [SerializeField] private long _cooldownEEnd;
+        [SerializeField] private long _cooldownREnd;
 
         public string Id { get => _id; set => _id = value; }
         public string Name { get => _name; set => _name = value; }
@@ -35,7 +44,18 @@ namespace Script.Game.Entity
         public float PosZ { get => _posZ; set => _posZ = value; }
         public float PosXDesired { get => _posXDesired; set => _posXDesired = value; }
         public float PosZDesired { get => _posZDesired; set => _posZDesired = value; }
+        public float Rotation { get => _rotation; set => _rotation = value; }
         public int Team { get => _team; set => _team = value; }
+        
+        public long CooldownQStart { get => _cooldownQStart; set => _cooldownQStart = value; }
+        public long CooldownWStart { get => _cooldownWStart; set => _cooldownWStart = value; }
+        public long CooldownEStart { get => _cooldownEStart; set => _cooldownEStart = value; }
+        public long CooldownRStart { get => _cooldownRStart; set => _cooldownRStart = value; }
+        public long CooldownQEnd { get => _cooldownQEnd; set => _cooldownQEnd = value; }
+        public long CooldownWEnd { get => _cooldownWEnd; set => _cooldownWEnd = value; }
+        public long CooldownEEnd { get => _cooldownEEnd; set => _cooldownEEnd = value; }
+        public long CooldownREnd { get => _cooldownREnd; set => _cooldownREnd = value; }
+        
 
         // Méthode pour initialiser les propriétés à partir d'une donnée ILivingEntity
         public void Initialize(ILivingEntity data)
@@ -54,7 +74,17 @@ namespace Script.Game.Entity
             PosZ = data.PosZ;
             PosXDesired = data.PosXDesired;
             PosZDesired = data.PosZDesired;
+            Rotation = data.Rotation;
             Team = data.Team;
+            
+            CooldownQStart = data.CooldownQStart;
+            CooldownWStart = data.CooldownWStart;
+            CooldownEStart = data.CooldownEStart;
+            CooldownRStart = data.CooldownRStart;
+            CooldownQEnd = data.CooldownQEnd;
+            CooldownWEnd = data.CooldownWEnd;
+            CooldownEEnd = data.CooldownEEnd;
+            CooldownREnd = data.CooldownREnd;
 
             // Positionner le transform du GameObject à la position initiale
             transform.position = new Vector3(PosX, transform.position.y, PosZ);

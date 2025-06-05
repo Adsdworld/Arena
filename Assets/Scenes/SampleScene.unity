@@ -861,7 +861,16 @@ MonoBehaviour:
   _posZ: 0
   _posXDesired: 0
   _posZDesired: 0
+  _rotation: 0
   _team: 0
+  _cooldownQStart: 0
+  _cooldownWStart: 0
+  _cooldownEStart: 0
+  _cooldownRStart: 0
+  _cooldownQEnd: 0
+  _cooldownWEnd: 0
+  _cooldownEEnd: 0
+  _cooldownREnd: 0
 --- !u!1 &480786233
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,7 +883,7 @@ GameObject:
   - component: {fileID: 480786236}
   - component: {fileID: 480786235}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: WText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1012,7 +1021,7 @@ GameObject:
   - component: {fileID: 487533101}
   - component: {fileID: 487533100}
   m_Layer: 5
-  m_Name: A_BACKGROUND
+  m_Name: Q_BACKGROUND
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1387,7 +1396,7 @@ GameObject:
   - component: {fileID: 674368558}
   - component: {fileID: 674368557}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: EText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1650,7 +1659,7 @@ GameObject:
   - component: {fileID: 805570219}
   - component: {fileID: 805570221}
   m_Layer: 5
-  m_Name: ABAR
+  m_Name: QBAR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1725,9 +1734,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a7eaea6787844368ae536df8812ab7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0.8
-  maxHealth: 0.4
-  ABAR: {fileID: 0}
+  CooldownQStart: 0
+  CooldownQEnd: 0
+  ABAR: {fileID: 805570219}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1866,7 +1875,7 @@ GameObject:
   - component: {fileID: 1116954497}
   - component: {fileID: 1116954496}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: RText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2184,7 +2193,7 @@ GameObject:
   - component: {fileID: 1232337662}
   - component: {fileID: 1232337661}
   m_Layer: 5
-  m_Name: Z_BACKGROUND
+  m_Name: W_BACKGROUND
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2337,9 +2346,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 631d02424ddd478fbbeb8801aea59add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  maxHealth: 0
-  EBAR: {fileID: 0}
+  CooldownEStart: 0
+  CooldownEEnd: 0
+  EBAR: {fileID: 1268138761}
 --- !u!1 &1355820965
 GameObject:
   m_ObjectHideFlags: 0
@@ -2351,7 +2360,6 @@ GameObject:
   - component: {fileID: 1355820966}
   - component: {fileID: 1355820968}
   - component: {fileID: 1355820967}
-  - component: {fileID: 1355820970}
   - component: {fileID: 1355820969}
   m_Layer: 5
   m_Name: RBAR
@@ -2429,24 +2437,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09fdec66ab7243b0962ef0c9e2ea0e45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  maxHealth: 0
-  RBAR: {fileID: 0}
---- !u!114 &1355820970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355820965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09fdec66ab7243b0962ef0c9e2ea0e45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 0
-  maxHealth: 0
-  RBAR: {fileID: 0}
+  CooldownRStart: 0
+  CooldownREnd: 0
+  RBAR: {fileID: 1355820967}
 --- !u!1 &1399946660
 GameObject:
   m_ObjectHideFlags: 0
@@ -2831,7 +2824,7 @@ GameObject:
   - component: {fileID: 1811827071}
   - component: {fileID: 1811827073}
   m_Layer: 5
-  m_Name: ZBAR
+  m_Name: WBAR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2906,9 +2899,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 318fa6d142a24e0bbfe2aa665147c23a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  maxHealth: 0
-  ZBAR: {fileID: 0}
+  CooldownWStart: 0
+  CooldownWEnd: 0
+  WBAR: {fileID: 1811827071}
 --- !u!1 &1839768574
 GameObject:
   m_ObjectHideFlags: 0
@@ -3179,7 +3172,7 @@ GameObject:
   - component: {fileID: 2112472572}
   - component: {fileID: 2112472571}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: QText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
