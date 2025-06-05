@@ -4,16 +4,16 @@ using Script.Game.Player;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Script.Ui.menu
-{
-    public class Health : MonoBehaviour
+namespace Script.Ui.menu.Abilities
+{ 
+    public class R : MonoBehaviour
     {
-        public float health; 
-        public float maxHealth; 
-    
-        public Image healthBar; 
-    
-    
+        public float health;
+        public float maxHealth;
+
+        public Image RBAR;
+
+
         // Update is called once per frame 
         void Update()
         {
@@ -23,7 +23,8 @@ namespace Script.Ui.menu
                 health = entity.Health;
                 maxHealth = entity.MaxHealth;
             }
-            healthBar.fillAmount = health / maxHealth;
+
+            RBAR.fillAmount = health / maxHealth;
         }
     }
 }
