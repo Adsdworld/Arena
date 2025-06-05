@@ -26,6 +26,8 @@ namespace Script.Network.response
         [JsonProperty("_notify")] public string Notify { get; set; }
         
         [JsonProperty("_livingEntities")] public List<LivingEntity> LivingEntities { get; set; }
+        
+        [JsonProperty("_timestamp")] public long Timestamp { get; set; }
 
         public ResponseEnum GetResponse()
         {

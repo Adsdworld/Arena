@@ -1,6 +1,4 @@
-﻿using System.Collections ; 
-using System.Collections.Generic;
-using Script.Game.Player;
+﻿using Script.Game.Player;
 using UnityEngine;
 using UnityEngine.UI;
 
