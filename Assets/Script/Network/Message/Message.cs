@@ -15,28 +15,38 @@ namespace Script.Network.Message
     [Serializable]
     public class Message
     {
-        [JsonProperty("_uuid")]
+        [JsonProperty("uuid")]
         private string _uuid;
         
         [NonSerialized] private ActionEnum _action;
-        [JsonProperty("_action")]
+        [JsonProperty("action")]
         public string Action => _action.GetActionName();  // Converti enum → string au moment de la sérialisation
 
         [NonSerialized] private GameNameEnum _gameName;
-        [JsonProperty("_gameName")]
+        [JsonProperty("gameName")]
         public string GameNameEnum => _gameName.GetGameName();  // Pareil
         
-        [JsonProperty("_ability")]
-        private string _ability;
-        
-        [JsonProperty("_x")]
+        [JsonProperty("posX")]
         private float? _x;
         
-        [JsonProperty("_z")]
+        [JsonProperty("posZ")]
         private float? _z;
         
-        [JsonProperty("_timestamp")]
+        [JsonProperty("posY")]
+        private float? _y;
+        
+        [JsonProperty("rotationY")]
+        private float? _rotationY;
+        
+        [JsonProperty("timestamp")]
         private long _timestamp;
+
+        [JsonProperty("cooldownQStart")] private long _cooldownQStart;
+        [JsonProperty("cooldownWStart")] private long _cooldownWStart;
+        [JsonProperty("cooldownEStart")] private long _cooldownEStart;
+        [JsonProperty("cooldownRStart")] private long _cooldownRStart;
+        
+        
 
         
         /// <summary>
@@ -82,15 +92,6 @@ namespace Script.Network.Message
             _gameName = gameNameEnum;
         }
         
-        public string GetAbility()
-        {
-            return _ability;
-        }
-        public void SetAbility(string ability)
-        {
-            _ability = ability;
-        }
-        
         public float? GetX()
         {
             return _x;
@@ -107,6 +108,41 @@ namespace Script.Network.Message
         public void SetZ(float? z)
         {
             _z = z;
+        }
+        
+        public long GetTimestamp()
+        {
+            return _timestamp;
+        }
+        public void SetTimestamp(long timestamp)
+        {
+            _timestamp = timestamp;
+        }
+        
+        public void SetCooldownQStart(long cooldownQStart)
+        {
+            _cooldownQStart = cooldownQStart;
+        }
+        public void SetCooldownWStart(long cooldownWStart)
+        {
+            _cooldownWStart = cooldownWStart;
+        }
+        public void SetCooldownEStart(long cooldownEStart)
+        {
+            _cooldownEStart = cooldownEStart;
+        }
+        public void SetCooldownRStart(long cooldownRStart)
+        {
+            _cooldownRStart = cooldownRStart;
+        }
+        
+        public void SetY(float? y)
+        {
+            _y = y;
+        }
+        public void SetRotationY(float? rotationY)
+        {
+            _rotationY = rotationY;
         }
 
         public override string ToString()

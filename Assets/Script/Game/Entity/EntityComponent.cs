@@ -1,4 +1,5 @@
-﻿using Script.Utils;
+﻿using Script.Game.Core;
+using Script.Utils;
 using UnityEngine;
 
 namespace Script.Game.Entity
@@ -17,9 +18,10 @@ namespace Script.Game.Entity
         [SerializeField] private bool _moving;
         [SerializeField] private float _posX;
         [SerializeField] private float _posZ;
+        [SerializeField] private float _posY;
         [SerializeField] private float _posXDesired;
         [SerializeField] private float _posZDesired;
-        [SerializeField] private float _rotation;
+        [SerializeField] private float _rotationY;
         [SerializeField] private int _team;
         [SerializeField] private long _cooldownQStart;
         [SerializeField] private long _cooldownWStart;
@@ -42,9 +44,10 @@ namespace Script.Game.Entity
         public bool Moving { get => _moving; set => _moving = value; }
         public float PosX { get => _posX; set => _posX = value; }
         public float PosZ { get => _posZ; set => _posZ = value; }
+        public float PosY { get => _posY; set => _posY = value; }
         public float PosXDesired { get => _posXDesired; set => _posXDesired = value; }
         public float PosZDesired { get => _posZDesired; set => _posZDesired = value; }
-        public float Rotation { get => _rotation; set => _rotation = value; }
+        public float RotationY { get => _rotationY; set => _rotationY = value; }
         public int Team { get => _team; set => _team = value; }
         
         public long CooldownQStart { get => _cooldownQStart; set => _cooldownQStart = value; }
@@ -74,7 +77,7 @@ namespace Script.Game.Entity
             PosZ = data.PosZ;
             PosXDesired = data.PosXDesired;
             PosZDesired = data.PosZDesired;
-            Rotation = data.Rotation;
+            RotationY = data.RotationY;
             Team = data.Team;
             
             CooldownQStart = data.CooldownQStart;
@@ -93,9 +96,61 @@ namespace Script.Game.Entity
         public void UpdateFromData(LivingEntity livingEntity)
         {
             Log.Info("@@@ Updating entity from data: " + livingEntity.Id);
-            
-            Health = livingEntity.Health;
-            
+
+            if (livingEntity.Id == UuidManager.GetUuid())
+            {
+                Id = livingEntity.Id;
+                Name = livingEntity.Name;
+                Health = livingEntity.Health;
+                MaxHealth = livingEntity.MaxHealth;
+                Armor = livingEntity.Armor;
+                MagicResist = livingEntity.MagicResist;
+                AttackDamage = livingEntity.AttackDamage;
+                AbilityPower = livingEntity.AbilityPower;
+                MoveSpeed = livingEntity.MoveSpeed;
+                Moving = livingEntity.Moving;
+                //PosX = livingEntity.PosX;
+                //PosZ = livingEntity.PosZ;
+                //PosXDesired = livingEntity.PosXDesired;
+                //PosZDesired = livingEntity.PosZDesired;
+                //Rotation = livingEntity.Rotation;
+                Team = livingEntity.Team;
+                //CooldownQStart = livingEntity.CooldownQStart;
+                //CooldownWStart = livingEntity.CooldownWStart;
+                //CooldownEStart = livingEntity.CooldownEStart;
+                //CooldownRStart = livingEntity.CooldownRStart;
+                CooldownQEnd = livingEntity.CooldownQEnd;
+                CooldownWEnd = livingEntity.CooldownWEnd;
+                CooldownEEnd = livingEntity.CooldownEEnd;
+                CooldownREnd = livingEntity.CooldownREnd;
+            }
+            else
+            {
+                Id = livingEntity.Id;
+                Name = livingEntity.Name;
+                Health = livingEntity.Health;
+                MaxHealth = livingEntity.MaxHealth;
+                Armor = livingEntity.Armor;
+                MagicResist = livingEntity.MagicResist;
+                AttackDamage = livingEntity.AttackDamage;
+                AbilityPower = livingEntity.AbilityPower;
+                MoveSpeed = livingEntity.MoveSpeed;
+                Moving = livingEntity.Moving;
+                PosX = livingEntity.PosX;
+                PosZ = livingEntity.PosZ;
+                PosXDesired = livingEntity.PosXDesired;
+                PosZDesired = livingEntity.PosZDesired;
+                RotationY = livingEntity.RotationY;
+                Team = livingEntity.Team;
+                CooldownQStart = livingEntity.CooldownQStart;
+                CooldownWStart = livingEntity.CooldownWStart;
+                CooldownEStart = livingEntity.CooldownEStart;
+                CooldownRStart = livingEntity.CooldownRStart;
+                CooldownQEnd = livingEntity.CooldownQEnd;
+                CooldownWEnd = livingEntity.CooldownWEnd;
+                CooldownEEnd = livingEntity.CooldownEEnd;
+                CooldownREnd = livingEntity.CooldownREnd;
+            }
         }
     }
 }

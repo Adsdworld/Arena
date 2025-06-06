@@ -14,9 +14,10 @@
         bool Moving { get; set; }
         float PosX { get; set; }
         float PosZ { get; set; }
+        float PosY { get; set; }
         float PosXDesired { get; set; }
         float PosZDesired { get; set; }
-        float Rotation { get; set; }
+        float RotationY { get; set; }
         int Team { get; set; }
         long CooldownQStart { get; set; }
         long CooldownWStart { get; set; }

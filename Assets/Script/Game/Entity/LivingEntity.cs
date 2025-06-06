@@ -39,13 +39,15 @@ namespace Script.Game.Entity
         public float PosX { get; set; }
         [JsonProperty("posZ")]
         public float PosZ { get; set; }
+        [JsonProperty("posY")]
+        public float PosY { get; set; }
         [JsonProperty("posXDesired")]
         public float PosXDesired { get; set; }
         [JsonProperty("posZDesired")]
         public float PosZDesired { get; set; }
         
-        [JsonProperty("rotation")]
-        public float Rotation { get; set; }
+        [JsonProperty("rotationY")]
+        public float RotationY { get; set; }
 
         [JsonProperty("team")]
         public int Team { get; set; }
