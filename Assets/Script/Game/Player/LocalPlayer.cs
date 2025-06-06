@@ -8,11 +8,13 @@ namespace Script.Game.Player
     public class LocalPlayer : MonoBehaviour
     {
         [SerializeField]
-        public static string defaultControlledEntityId = "Entity_default";
+        public static string defaultControlledEntityId = "Player"; //
 
         [SerializeField] public string ControlledEntityId;
 
         [SerializeField] public GameObject ControlledEntity;
+        
+        [SerializeField] public GameNameEnum GameName;
 
         
         [SerializeField]
@@ -53,7 +55,7 @@ namespace Script.Game.Player
         {
             UpDateControlledEntity();
             
-            // Tester la touche Q (juste pressée)
+            /*// Tester la touche Q (juste pressée)
             if (Keyboard.current.qKey.wasPressedThisFrame)
             {
                 long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
@@ -94,7 +96,7 @@ namespace Script.Game.Player
                     entity.CooldownRStart = now;
                     entity.CooldownREnd = now + 5000; // cooldown 5s
                 }
-            }
+            }*/
          }
         
         private void UpDateControlledEntity()

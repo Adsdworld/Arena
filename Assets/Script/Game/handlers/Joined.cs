@@ -1,4 +1,5 @@
-﻿using Script.Network.response;
+﻿using Script.Game.Player;
+using Script.Network.response;
 using Script.Utils;
 
 namespace Script.Game.handlers
@@ -8,6 +9,8 @@ namespace Script.Game.handlers
         public void handle(Response response)
         {
             Log.Info("Handling Joined Response");
+
+            LocalPlayer.Instance.GameName = response.GameName;
         }
     }
 }

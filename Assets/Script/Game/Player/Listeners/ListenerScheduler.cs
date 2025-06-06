@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
+using Script.Game.Entity;
+using Script.Network.Message;
 
 namespace Script.Game.Player.Listeners
 {
     public class ListenerScheduler : MonoBehaviour
     {
         // Intervalle entre chaque update en secondes (50 ms = 0.05s)
-        [SerializeField] private float interval = 0.05f;
+        [SerializeField] private float interval = 1f;
 
         private float timer = 0f;
 
@@ -52,6 +54,33 @@ namespace Script.Game.Player.Listeners
             {
                 listener.Invoke();
             }
+        }
+
+        public Message CreateMessage()
+        {
+            TriggerListeners();
+
+            var localPlayer = LocalPlayer.Instance;
+            
+            var entity = localPlayer.GetControlledEntityComponent();
+            Message message = new Message();
+            
+            message.SetGameNameEnum(localPlayer.GameName);
+            
+            message.SetX(entity.PosX);
+            message.SetZ(entity.PosZ);
+            message.SetY(entity.PosY);
+            message.SetRotationY(entity.RotationY);
+            message.SetPosXDesired(entity.PosXDesired);
+            message.SetPosZDesired(entity.PosZDesired);
+            message.SetPosYDesired(entity.PosYDesired);
+
+            message.SetCooldownQStart(entity.CooldownQStart);
+            message.SetCooldownWStart(entity.CooldownWStart);
+            message.SetCooldownEStart(entity.CooldownEStart);
+            message.SetCooldownRStart(entity.CooldownRStart);
+
+            return message;
         }
     }
 }

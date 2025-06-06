@@ -21,6 +21,7 @@ namespace Script.Game.Entity
         [SerializeField] private float _posY;
         [SerializeField] private float _posXDesired;
         [SerializeField] private float _posZDesired;
+        [SerializeField] private float _posYDesired;
         [SerializeField] private float _rotationY;
         [SerializeField] private int _team;
         [SerializeField] private long _cooldownQStart;
@@ -31,6 +32,10 @@ namespace Script.Game.Entity
         [SerializeField] private long _cooldownWEnd;
         [SerializeField] private long _cooldownEEnd;
         [SerializeField] private long _cooldownREnd;
+        [SerializeField] private long _cooldownQMs;
+        [SerializeField] private long _cooldownWMs;
+        [SerializeField] private long _cooldownEMs;
+        [SerializeField] private long _cooldownRMs;
 
         public string Id { get => _id; set => _id = value; }
         public string Name { get => _name; set => _name = value; }
@@ -47,6 +52,7 @@ namespace Script.Game.Entity
         public float PosY { get => _posY; set => _posY = value; }
         public float PosXDesired { get => _posXDesired; set => _posXDesired = value; }
         public float PosZDesired { get => _posZDesired; set => _posZDesired = value; }
+        public float PosYDesired { get => _posYDesired; set => _posYDesired = value; }
         public float RotationY { get => _rotationY; set => _rotationY = value; }
         public int Team { get => _team; set => _team = value; }
         
@@ -58,6 +64,11 @@ namespace Script.Game.Entity
         public long CooldownWEnd { get => _cooldownWEnd; set => _cooldownWEnd = value; }
         public long CooldownEEnd { get => _cooldownEEnd; set => _cooldownEEnd = value; }
         public long CooldownREnd { get => _cooldownREnd; set => _cooldownREnd = value; }
+        
+        public long CooldownQMs { get => _cooldownQMs; set => _cooldownQMs = value; }
+        public long CooldownWMs { get => _cooldownWMs; set => _cooldownWMs = value; }
+        public long CooldownEMs { get => _cooldownEMs; set => _cooldownEMs = value; }
+        public long CooldownRMs { get => _cooldownRMs; set => _cooldownRMs = value; }
         
 
         // Méthode pour initialiser les propriétés à partir d'une donnée ILivingEntity
@@ -111,9 +122,11 @@ namespace Script.Game.Entity
                 Moving = livingEntity.Moving;
                 //PosX = livingEntity.PosX;
                 //PosZ = livingEntity.PosZ;
+                //PosY = livingEntity.PosY;
                 //PosXDesired = livingEntity.PosXDesired;
                 //PosZDesired = livingEntity.PosZDesired;
-                //Rotation = livingEntity.Rotation;
+                //PosYDesired = livingEntity.PosYDesired;
+                //RotationY = livingEntity.RotationY;
                 Team = livingEntity.Team;
                 //CooldownQStart = livingEntity.CooldownQStart;
                 //CooldownWStart = livingEntity.CooldownWStart;
@@ -123,6 +136,11 @@ namespace Script.Game.Entity
                 CooldownWEnd = livingEntity.CooldownWEnd;
                 CooldownEEnd = livingEntity.CooldownEEnd;
                 CooldownREnd = livingEntity.CooldownREnd;
+                CooldownQMs = livingEntity.CooldownQMs;
+                CooldownWMs = livingEntity.CooldownWMs;
+                CooldownEMs = livingEntity.CooldownEMs;
+                CooldownRMs = livingEntity.CooldownRMs;
+                
             }
             else
             {
@@ -140,6 +158,7 @@ namespace Script.Game.Entity
                 PosZ = livingEntity.PosZ;
                 PosXDesired = livingEntity.PosXDesired;
                 PosZDesired = livingEntity.PosZDesired;
+                PosYDesired = livingEntity.PosYDesired;
                 RotationY = livingEntity.RotationY;
                 Team = livingEntity.Team;
                 CooldownQStart = livingEntity.CooldownQStart;
@@ -150,6 +169,10 @@ namespace Script.Game.Entity
                 CooldownWEnd = livingEntity.CooldownWEnd;
                 CooldownEEnd = livingEntity.CooldownEEnd;
                 CooldownREnd = livingEntity.CooldownREnd;
+                CooldownQMs = livingEntity.CooldownQMs;
+                CooldownWMs = livingEntity.CooldownWMs;
+                CooldownEMs = livingEntity.CooldownEMs;
+                CooldownRMs = livingEntity.CooldownRMs;
             }
         }
     }

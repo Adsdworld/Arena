@@ -4,7 +4,7 @@ using WebSocketSharp;
 
 namespace Script.Camera
 {
-    public class Camera : MonoBehaviour
+    public class MainCamera : MonoBehaviour
     {
         //public Transform target;
         public float followSpeed = 10f;

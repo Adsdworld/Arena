@@ -6,14 +6,14 @@ using UnityEngine.InputSystem;
 
 namespace Script.Game.Player.Controls
 {
-    public class Q : MonoBehaviour
+    public class W : MonoBehaviour
     {
         private InputSystem_Actions controls;
 
         private void Awake()
         {
             controls = new InputSystem_Actions();
-            controls.Player.Q.performed += OnQ;
+            controls.Player.W.performed += OnW;
         }
 
         private void OnEnable()
@@ -26,19 +26,19 @@ namespace Script.Game.Player.Controls
             controls.Player.Disable();
         }
 
-        private void OnQ(InputAction.CallbackContext context)
+        private void OnW(InputAction.CallbackContext context)
         {
             long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             var entity = LocalPlayer.Instance.GetControlledEntityComponent();
             if (entity != null)
             {
-                entity.CooldownQEnd = now + entity.CooldownQMs;
-                entity.CooldownQStart = now;
+                entity.CooldownWEnd = now + entity.CooldownWMs;
+                entity.CooldownWStart = now;
             }
 
             Message message = ListenerScheduler.Instance.CreateMessage();
             message.SetAction(ActionEnum.CooldownStart);
-            message.SetCooldownQStart(now);
+            message.SetCooldownWStart(now);
             message.Send();
         }
     }

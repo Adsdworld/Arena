@@ -7,7 +7,7 @@ namespace Script.Game.handlers
     {
         public void handle(Response response)
         {
-            Log.Info("Handling GameAlreadyExists Response");
+            //Log.Info("Handling GameAlreadyExists Response");
         }
     }
 }

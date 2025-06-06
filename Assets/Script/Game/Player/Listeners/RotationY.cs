@@ -40,7 +40,7 @@ namespace Script.Game.Player.Listeners
             if (player != null && playerComponent != null)
             {
                 float yRotation = player.transform.eulerAngles.y;
-                playerComponent.Rotation = yRotation;
+                playerComponent.RotationY = yRotation;
             }
             else
             {

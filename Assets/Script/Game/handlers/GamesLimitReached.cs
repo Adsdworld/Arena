@@ -7,7 +7,7 @@ namespace Script.Game.handlers
     {
         public void handle(Response response)
         {
-            Log.Info("Handling GamesLimitReached Response");
+            //Log.Info("Handling GamesLimitReached Response");
         }
     }
 }

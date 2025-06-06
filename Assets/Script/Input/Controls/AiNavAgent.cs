@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Script.Game.Player;
+using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using Script.Utils;
@@ -72,6 +73,10 @@ namespace Script.Input.Controls
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 agent.SetDestination(hit.point);
+                var entity = LocalPlayer.Instance.GetControlledEntityComponent();
+                entity.PosXDesired = hit.point.x;
+                entity.PosZDesired = hit.point.z;
+                entity.PosYDesired = hit.point.y;
             }
         }
     }

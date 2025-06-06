@@ -35,6 +35,15 @@ namespace Script.Network.Message
         [JsonProperty("posY")]
         private float? _y;
         
+        [JsonProperty("posXDesired")]
+        private float? _posXDesired;
+        
+        [JsonProperty("posZDesired")]
+        private float? _posZDesired;
+        
+        [JsonProperty("posYDesired")]
+        private float? _posYDesired;
+        
         [JsonProperty("rotationY")]
         private float? _rotationY;
         
@@ -92,23 +101,31 @@ namespace Script.Network.Message
             _gameName = gameNameEnum;
         }
         
-        public float? GetX()
-        {
-            return _x;
-        }
         public void SetX(float? x)
         {
             _x = x;
-        }
-        
-        public float? GetZ()
-        {
-            return _z;
         }
         public void SetZ(float? z)
         {
             _z = z;
         }
+        public void SetY(float? y)
+        {
+            _y = y;
+        }
+        public void SetPosXDesired(float? posXDesired)
+        {
+            _posXDesired = posXDesired;
+        }
+        public void SetPosZDesired(float? posZDesired)
+        {
+            _posZDesired = posZDesired;
+        }
+        public void SetPosYDesired(float? posYDesired)
+        {
+            _posYDesired = posYDesired;
+        }
+        
         
         public long GetTimestamp()
         {
@@ -136,10 +153,6 @@ namespace Script.Network.Message
             _cooldownRStart = cooldownRStart;
         }
         
-        public void SetY(float? y)
-        {
-            _y = y;
-        }
         public void SetRotationY(float? rotationY)
         {
             _rotationY = rotationY;

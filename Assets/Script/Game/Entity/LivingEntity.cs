@@ -45,6 +45,8 @@ namespace Script.Game.Entity
         public float PosXDesired { get; set; }
         [JsonProperty("posZDesired")]
         public float PosZDesired { get; set; }
+        [JsonProperty("posYDesired")]
+        public float PosYDesired { get; set; }
         
         [JsonProperty("rotationY")]
         public float RotationY { get; set; }
@@ -69,5 +71,14 @@ namespace Script.Game.Entity
         public long CooldownEEnd { get; set; }
         [JsonProperty("cooldownREnd")]
         public long CooldownREnd { get; set; }
+        
+        [JsonProperty("cooldownQMs")]
+        public long CooldownQMs { get; set; }
+        [JsonProperty("cooldownWMs")]
+        public long CooldownWMs { get; set; }
+        [JsonProperty("cooldownEMs")]
+        public long CooldownEMs { get; set; }
+        [JsonProperty("cooldownRMs")]
+        public long CooldownRMs { get; set; }
     }
 }
