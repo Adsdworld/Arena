@@ -1,6 +1,8 @@
 ﻿using System;
+using Script.Game.Entity;
 using Script.Game.Player.Listeners;
 using Script.Network.Message;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +11,8 @@ namespace Script.Game.Player.Controls
     public class R : MonoBehaviour
     {
         private InputSystem_Actions controls;
+        [SerializeField] private EntityComponent entityComponent;
+
 
         private void Awake()
         {
@@ -30,16 +34,21 @@ namespace Script.Game.Player.Controls
         {
             long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             var entity = LocalPlayer.Instance.GetControlledEntityComponent();
-            if (entity != null)
+            if (!entityComponent.IsUnityNull())
             {
-                entity.CooldownREnd = now + entity.CooldownRMs;
-                entity.CooldownRStart = now;
+                entityComponent.CooldownREnd = now + entityComponent.CooldownRMs;
+                entityComponent.CooldownRStart = now;
             }
 
             Message message = ListenerScheduler.Instance.CreateMessage();
             message.SetAction(ActionEnum.CooldownStart);
             message.SetCooldownEStart(now);
             message.Send();
+        }
+        
+        public void UpdateREntityController(GameObject agameObject)
+        {
+            entityComponent = agameObject.GetComponent<EntityComponent>();
         }
     }
 }

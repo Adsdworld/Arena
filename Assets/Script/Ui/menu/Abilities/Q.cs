@@ -12,7 +12,7 @@ namespace Script.Ui.menu.Abilities
 
         public Image ABAR;
 
-        void Update()
+        void LateUpdate()
         {
             // --- Affichage de la barre ---
             var controlledEntity = LocalPlayer.Instance.GetControlledEntityComponent();

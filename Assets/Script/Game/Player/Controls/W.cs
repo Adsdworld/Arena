@@ -1,6 +1,8 @@
 ﻿using System;
+using Script.Game.Entity;
 using Script.Game.Player.Listeners;
 using Script.Network.Message;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +11,8 @@ namespace Script.Game.Player.Controls
     public class W : MonoBehaviour
     {
         private InputSystem_Actions controls;
+        [SerializeField] private EntityComponent entityComponent;
+
 
         private void Awake()
         {
@@ -29,17 +33,21 @@ namespace Script.Game.Player.Controls
         private void OnW(InputAction.CallbackContext context)
         {
             long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-            var entity = LocalPlayer.Instance.GetControlledEntityComponent();
-            if (entity != null)
+            if (!entityComponent.IsUnityNull())
             {
-                entity.CooldownWEnd = now + entity.CooldownWMs;
-                entity.CooldownWStart = now;
+                entityComponent.CooldownWEnd = now + entityComponent.CooldownWMs;
+                entityComponent.CooldownWStart = now;
             }
 
             Message message = ListenerScheduler.Instance.CreateMessage();
             message.SetAction(ActionEnum.CooldownStart);
             message.SetCooldownWStart(now);
             message.Send();
+        }
+        
+        public void UpdateWEntityController(GameObject agameObject)
+        {
+            entityComponent = agameObject.GetComponent<EntityComponent>();
         }
     }
 }

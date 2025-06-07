@@ -97,7 +97,12 @@ namespace Script.Game.Player
         private void UpDateEntityControllers()
         {
             GameObject.FindFirstObjectByType<MainCamera>().UpdateMainCameraControlledEntity(ControlledEntity);
-            //RightClic.UpdateRightClicEntityController(ControlledEntity);
+            GameObject.FindAnyObjectByType<RightClic>().UpdateRightClicEntityController(ControlledEntity);
+            GameObject.FindAnyObjectByType<Q>().UpdateQEntityController(ControlledEntity);
+            GameObject.FindAnyObjectByType<W>().UpdateWEntityController(ControlledEntity);
+            GameObject.FindAnyObjectByType<E>().UpdateEEntityController(ControlledEntity);
+            GameObject.FindAnyObjectByType<R>().UpdateREntityController(ControlledEntity);
+            
         }
 
         public void SetControlledEntityId(string id)
