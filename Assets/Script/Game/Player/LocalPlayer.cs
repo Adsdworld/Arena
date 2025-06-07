@@ -8,7 +8,7 @@ namespace Script.Game.Player
     public class LocalPlayer : MonoBehaviour
     {
         [SerializeField]
-        public static string defaultControlledEntityId = "Player"; //
+        public static string defaultControlledEntityId = "Entity_default"; //
 
         [SerializeField] public string ControlledEntityId;
 
