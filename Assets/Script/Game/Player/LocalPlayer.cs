@@ -128,14 +128,14 @@ namespace Script.Game.Player
         
         public EntityComponent GetControlledEntityComponent()
         {
-            if (ControlledEntity == null)
+            if (ControlledEntity.IsUnityNull())
             {
                 Log.Warn("ControlledEntity is null in GetControlledEntityComponent()");
                 return null;
             }
 
             var component = ControlledEntity.GetComponent<EntityComponent>();
-            if (component == null)
+            if (component.IsUnityNull())
             {
                 Log.Warn("EntityComponent not found on ControlledEntity");
             }

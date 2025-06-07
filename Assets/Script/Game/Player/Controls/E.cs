@@ -31,17 +31,19 @@ namespace Script.Game.Player.Controls
 
         private void OnE(InputAction.CallbackContext context)
         {
-            long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            var now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             if (!entityComponent.IsUnityNull())
             {
-                entityComponent.CooldownEEnd = now + entityComponent.CooldownEMs;
-                entityComponent.CooldownEStart = now;
+                if (entityComponent.CooldownEEnd <= now)
+                {
+                    entityComponent.CooldownEEnd = now + entityComponent.CooldownEMs;
+                    entityComponent.CooldownEStart = now;
+                    var message = ListenerScheduler.Instance.CreateMessage();
+                    message.SetAction(ActionEnum.CooldownStart);
+                    message.SetCooldownEStart(now);
+                    message.Send();
+                }
             }
-
-            Message message = ListenerScheduler.Instance.CreateMessage();
-            message.SetAction(ActionEnum.CooldownStart);
-            message.SetCooldownEStart(now);
-            message.Send();
         }
         
         public void UpdateEEntityController(GameObject agameObject)

@@ -32,18 +32,19 @@ namespace Script.Game.Player.Controls
 
         private void OnR(InputAction.CallbackContext context)
         {
-            long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-            var entity = LocalPlayer.Instance.GetControlledEntityComponent();
+            var now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             if (!entityComponent.IsUnityNull())
             {
-                entityComponent.CooldownREnd = now + entityComponent.CooldownRMs;
-                entityComponent.CooldownRStart = now;
+                if (entityComponent.CooldownREnd <= now)
+                {
+                    entityComponent.CooldownREnd = now + entityComponent.CooldownRMs;
+                    entityComponent.CooldownRStart = now;
+                    var message = ListenerScheduler.Instance.CreateMessage();
+                    message.SetAction(ActionEnum.CooldownStart);
+                    message.SetCooldownWStart(now);
+                    message.Send();
+                }
             }
-
-            Message message = ListenerScheduler.Instance.CreateMessage();
-            message.SetAction(ActionEnum.CooldownStart);
-            message.SetCooldownEStart(now);
-            message.Send();
         }
         
         public void UpdateREntityController(GameObject agameObject)

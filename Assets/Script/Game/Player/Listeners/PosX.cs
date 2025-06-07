@@ -1,5 +1,6 @@
 ﻿using Script.Game.Entity;
 using Script.Utils;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Script.Game.Player.Listeners
@@ -16,7 +17,7 @@ namespace Script.Game.Player.Listeners
         private void Start()
         {
             _scheduler = FindFirstObjectByType<ListenerScheduler>();
-            if (_scheduler != null)
+            if (!_scheduler.IsUnityNull())
             {
                 _scheduler.RegisterListener(UpdatePosX);
             }
@@ -30,7 +31,7 @@ namespace Script.Game.Player.Listeners
 
         private void OnDestroy()
         {
-            if (_scheduler != null)
+            if (!_scheduler.IsUnityNull())
             {
                 _scheduler.UnregisterListener(UpdatePosX);
             }
@@ -41,7 +42,7 @@ namespace Script.Game.Player.Listeners
             player = LocalPlayer.Instance.GetControlledEntity();
             playerComponent = LocalPlayer.Instance.GetControlledEntityComponent();
 
-            if (player != null && playerComponent != null)
+            if (!player.IsUnityNull() && !playerComponent.IsUnityNull())
             {
                 _x = player.transform.position.x;
                 playerComponent.PosX = _x;

@@ -32,17 +32,19 @@ namespace Script.Game.Player.Controls
 
         private void OnW(InputAction.CallbackContext context)
         {
-            long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            var now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             if (!entityComponent.IsUnityNull())
             {
-                entityComponent.CooldownWEnd = now + entityComponent.CooldownWMs;
-                entityComponent.CooldownWStart = now;
+                if (entityComponent.CooldownWEnd <= now)
+                {
+                    entityComponent.CooldownWEnd = now + entityComponent.CooldownWMs;
+                    entityComponent.CooldownWStart = now;
+                    var message = ListenerScheduler.Instance.CreateMessage();
+                    message.SetAction(ActionEnum.CooldownStart);
+                    message.SetCooldownWStart(now);
+                    message.Send();
+                }
             }
-
-            Message message = ListenerScheduler.Instance.CreateMessage();
-            message.SetAction(ActionEnum.CooldownStart);
-            message.SetCooldownWStart(now);
-            message.Send();
         }
         
         public void UpdateWEntityController(GameObject agameObject)

@@ -32,17 +32,19 @@ namespace Script.Game.Player.Controls
 
         private void OnQ(InputAction.CallbackContext context)
         {
-            long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            var now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             if (!entityComponent.IsUnityNull())
             {
-                entityComponent.CooldownQEnd = now + entityComponent.CooldownQMs;
-                entityComponent.CooldownQStart = now;
+                if (entityComponent.CooldownQEnd <= now)
+                {
+                    entityComponent.CooldownQEnd = now + entityComponent.CooldownQMs;
+                    entityComponent.CooldownQStart = now;
+                    var message = ListenerScheduler.Instance.CreateMessage();
+                    message.SetAction(ActionEnum.CooldownStart);
+                    message.SetCooldownWStart(now);
+                    message.Send();
+                }
             }
-
-            Message message = ListenerScheduler.Instance.CreateMessage();
-            message.SetAction(ActionEnum.CooldownStart);
-            message.SetCooldownQStart(now);
-            message.Send();
         }
         
         public void UpdateQEntityController(GameObject agameObject)

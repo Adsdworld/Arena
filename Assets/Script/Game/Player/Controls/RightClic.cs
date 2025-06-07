@@ -1,4 +1,6 @@
 ﻿using Script.Game.Entity;
+using Script.Game.Player.Listeners;
+using Script.Network.Message;
 using Script.Utils;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -61,6 +63,11 @@ namespace Script.Game.Player.Controls
                 _agent.SetDestination(hit.point);
                 Quaternion targetRotation = Quaternion.LookRotation(_agent.desiredVelocity);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 900 * Time.deltaTime);
+
+                Message message = ListenerScheduler.Instance.CreateMessage();
+                // penser côté java à mettre à jour les infos avec les datas x, y, z,
+                // pas que l'action et as t on vraiment besoin de l'action :
+                // je dirais que pour les cast et les attaques
             }
         }
 

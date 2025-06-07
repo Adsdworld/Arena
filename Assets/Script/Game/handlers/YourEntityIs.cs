@@ -11,7 +11,7 @@ namespace Script.Game.handlers
             //Log.Info("YourEntityIs response received: " + response.Uuid);
             var entity = LocalPlayer.Instance;
             entity.GameName = response.GameName;
-            entity.SetControlledEntityId("Entity_" + response.Uuid);
+            entity.SetControlledEntityId("Entity_" + response.Text);
         }
     }
 }

@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace Script.Game.Player.Listeners
 {
-    public class PosZ : MonoBehaviour
+    public class PosY : MonoBehaviour
     {
         [SerializeField] public GameObject player;
         [SerializeField] public EntityComponent playerComponent;
-        [SerializeField] public float _z;
+        [SerializeField] public float _y;
 
         private ListenerScheduler _scheduler;
 
@@ -42,8 +42,8 @@ namespace Script.Game.Player.Listeners
 
             if (!player.IsUnityNull() && !playerComponent.IsUnityNull())
             {
-                _z = player.transform.position.z;
-                playerComponent.PosZ = _z;
+                _y = player.transform.position.y;
+                playerComponent.PosZ = _y;
             }
             else
             {

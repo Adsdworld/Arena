@@ -303,6 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e97cc14b17394086bdc508e9e6d30b93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entityComponent: {fileID: 0}
 --- !u!114 &88379111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,6 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87402797b5ca42d2bbe6e0727159f07f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entityComponent: {fileID: 0}
 --- !u!114 &88379112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,6 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b63e93e5578440d3b22fc2223a52c3e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entityComponent: {fileID: 0}
 --- !u!114 &88379113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,6 +342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bebc43b52eee41e2b4d1147db05d9ec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entityComponent: {fileID: 0}
 --- !u!114 &88379114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -952,10 +956,10 @@ MonoBehaviour:
   _cooldownWEnd: 0
   _cooldownEEnd: 0
   _cooldownREnd: 0
-  _cooldownQMs: 0
-  _cooldownWMs: 0
-  _cooldownEMs: 0
-  _cooldownRMs: 0
+  _cooldownQMs: 3000
+  _cooldownWMs: 15000
+  _cooldownEMs: 30000
+  _cooldownRMs: 120000
 --- !u!195 &416402567
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1655,6 +1659,7 @@ GameObject:
   - component: {fileID: 756386977}
   - component: {fileID: 756386976}
   - component: {fileID: 756386975}
+  - component: {fileID: 756386978}
   - component: {fileID: 756386974}
   m_Layer: 0
   m_Name: Listeners
@@ -1735,6 +1740,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interval: 1
+--- !u!114 &756386978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756386972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c44234e4d77541a790935102d81c1a26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  playerComponent: {fileID: 0}
+  _y: 0
 --- !u!1 &805570217
 GameObject:
   m_ObjectHideFlags: 0

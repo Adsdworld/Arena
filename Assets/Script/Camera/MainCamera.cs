@@ -52,11 +52,13 @@ namespace Script.Camera
                 edgeScrollOffset = Vector3.zero;
             }
 
-            Vector3 rotatedOffset = Quaternion.Euler(_rotationHandler.GetRotation()) * offset;
-            Vector3 desiredPosition = target.transform.position + rotatedOffset + edgeScrollOffset;
-
-            transform.position = Vector3.Lerp(transform.position, desiredPosition, followSpeed * Time.deltaTime);
-            transform.rotation = Quaternion.Euler(_rotationHandler.GetRotation());
+            if (!target.IsUnityNull())
+            {
+                Vector3 rotatedOffset = Quaternion.Euler(_rotationHandler.GetRotation()) * offset;
+                Vector3 desiredPosition = target.transform.position + rotatedOffset + edgeScrollOffset;
+                transform.position = Vector3.Lerp(transform.position, desiredPosition, followSpeed * Time.deltaTime);
+                transform.rotation = Quaternion.Euler(_rotationHandler.GetRotation());
+            }
         }
 
         public void UpdateMainCameraControlledEntity(GameObject _gameObject)
