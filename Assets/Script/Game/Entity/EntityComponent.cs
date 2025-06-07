@@ -1,4 +1,5 @@
 ﻿using Script.Game.Core;
+using Script.Game.Player.Controls;
 using Script.Utils;
 using UnityEngine;
 
@@ -45,7 +46,16 @@ namespace Script.Game.Entity
         public int MagicResist { get => _magicResist; set => _magicResist = value; }
         public int AttackDamage { get => _attackDamage; set => _attackDamage = value; }
         public int AbilityPower { get => _abilityPower; set => _abilityPower = value; }
-        public float MoveSpeed { get => _moveSpeed; set => _moveSpeed = value; }
+        
+        public float MoveSpeed { 
+            get => _moveSpeed; 
+            set 
+            {
+                _moveSpeed = value;
+                //RightClic.SetMoveSpeed(value);
+            }
+        }
+        
         public bool Moving { get => _moving; set => _moving = value; }
         public float PosX { get => _posX; set => _posX = value; }
         public float PosZ { get => _posZ; set => _posZ = value; }
@@ -74,6 +84,8 @@ namespace Script.Game.Entity
         // Méthode pour initialiser les propriétés à partir d'une donnée ILivingEntity
         public void Initialize(ILivingEntity data)
         {
+            Log.Info("Initializing EntityComponent with data: " + data.PosX + ", " + data.PosY + ", " + data.PosZ);
+
             Id = data.Id;
             Name = data.Name;
             Health = data.Health;
@@ -86,6 +98,7 @@ namespace Script.Game.Entity
             Moving = data.Moving;
             PosX = data.PosX;
             PosZ = data.PosZ;
+            PosY = data.PosY;
             PosXDesired = data.PosXDesired;
             PosZDesired = data.PosZDesired;
             RotationY = data.RotationY;
@@ -99,17 +112,15 @@ namespace Script.Game.Entity
             CooldownWEnd = data.CooldownWEnd;
             CooldownEEnd = data.CooldownEEnd;
             CooldownREnd = data.CooldownREnd;
-
-            // Positionner le transform du GameObject à la position initiale
-            transform.position = new Vector3(PosX, transform.position.y, PosZ);
         }
 
         public void UpdateFromData(LivingEntity livingEntity)
         {
-            Log.Info("@@@ Updating entity from data: " + livingEntity.Id);
-
+            //Log.Info(livingEntity.Id + " == " + UuidManager.GetUuid() +" @@@ Updating entity from data: ");
+            
             if (livingEntity.Id == UuidManager.GetUuid())
             {
+                //Log.Info("Equals to local player, updating local properties.");
                 Id = livingEntity.Id;
                 Name = livingEntity.Name;
                 Health = livingEntity.Health;

@@ -8,15 +8,11 @@ namespace Script.Game.handlers
     {
         public void handle(Response response)
         {
-            Log.Info("Handling Game State Response");
-            
             MainThreadDispatcher.Enqueue((() =>
             {
                 EntityManager.Instance.ProcessLivingEntitiesFromServer(response.LivingEntities);
 
             }));
-            
-            Log.Info("Game State Response handled successfully.");
         }
     }
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5924083961052672123}
   - component: {fileID: 4219475241449219575}
   - component: {fileID: 4568080968226917135}
-  - component: {fileID: 5103333547275202216}
+  - component: {fileID: 1381266807758367711}
   m_Layer: 0
   m_Name: EntityBase
   m_TagString: Untagged
@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 2111198669574771738}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 496, y: 0, z: 524}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 723.0251, y: 5, z: 752.9824}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -135,11 +135,11 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &5103333547275202216
+--- !u!114 &1381266807758367711
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,18 +151,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 080239068f6f44589d1e927b5d9d020d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 
-  name: 
-  health: 0
-  maxHealth: 0
-  armor: 0
-  magicResist: 0
-  attackDamage: 0
-  abilityPower: 0
-  moveSpeed: 0
-  moving: 0
-  posX: 0
-  posZ: 0
-  posXDesired: 0
-  posZDesired: 0
-  team: 0
+  _id: 
+  _name: 
+  _health: 0
+  _maxHealth: 0
+  _armor: 0
+  _magicResist: 0
+  _attackDamage: 0
+  _abilityPower: 0
+  _moveSpeed: 0
+  _moving: 0
+  _posX: 0
+  _posZ: 0
+  _posY: 0
+  _posXDesired: 0
+  _posZDesired: 0
+  _posYDesired: 0
+  _rotationY: 0
+  _team: 0
+  _cooldownQStart: 0
+  _cooldownWStart: 0
+  _cooldownEStart: 0
+  _cooldownRStart: 0
+  _cooldownQEnd: 0
+  _cooldownWEnd: 0
+  _cooldownEEnd: 0
+  _cooldownREnd: 0
+  _cooldownQMs: 0
+  _cooldownWMs: 0
+  _cooldownEMs: 0
+  _cooldownRMs: 0

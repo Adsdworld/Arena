@@ -23,13 +23,6 @@ namespace Script.Game.Map
                 {
                     transform.localScale = new Vector3(20f, 20f, 20f);
                     Log.Info("GLB summoner rift loaded and instantiated successfully.");
-                    foreach (var renderer in GetComponentsInChildren<Renderer>())
-                    {
-                        foreach (var mat in renderer.sharedMaterials)
-                        {
-                            Debug.Log($"Material: {mat?.name ?? "null"}, Shader: {mat?.shader?.name ?? "null"}");
-                        }
-                    }
                 }
                 else
                 {

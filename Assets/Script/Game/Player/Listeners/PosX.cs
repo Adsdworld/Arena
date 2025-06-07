@@ -9,39 +9,42 @@ namespace Script.Game.Player.Listeners
         [SerializeField] public GameObject player;
         [SerializeField] public EntityComponent playerComponent;
 
-        private ListenerScheduler scheduler;
+        [SerializeField] public float _x;
+
+        private ListenerScheduler _scheduler;
 
         private void Start()
         {
-            scheduler = FindFirstObjectByType<ListenerScheduler>();
-            if (scheduler != null)
+            _scheduler = FindFirstObjectByType<ListenerScheduler>();
+            if (_scheduler != null)
             {
-                scheduler.RegisterListener(UpdatePosX);
+                _scheduler.RegisterListener(UpdatePosX);
             }
             else
             {
                 Debug.LogWarning("ListenerScheduler not found in scene.");
             }
+
             UpdatePosX();
         }
 
         private void OnDestroy()
         {
-            if (scheduler != null)
+            if (_scheduler != null)
             {
-                scheduler.UnregisterListener(UpdatePosX);
+                _scheduler.UnregisterListener(UpdatePosX);
             }
         }
 
         private void UpdatePosX()
         {
-            player = LocalPlayer.Instance.ControlledEntity;
+            player = LocalPlayer.Instance.GetControlledEntity();
             playerComponent = LocalPlayer.Instance.GetControlledEntityComponent();
 
             if (player != null && playerComponent != null)
             {
-                float x = player.transform.position.x;
-                playerComponent.PosX = x;
+                _x = player.transform.position.x;
+                playerComponent.PosX = _x;
             }
             else
             {

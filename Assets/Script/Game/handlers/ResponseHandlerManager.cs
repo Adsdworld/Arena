@@ -19,6 +19,7 @@ namespace Script.Game.handlers
             _handlers[ResponseEnum.GameClosed] = new GameClosed();
             _handlers[ResponseEnum.Joined] = new Joined();
             _handlers[ResponseEnum.GameState] = new GameState();
+            _handlers[ResponseEnum.YourEntityIs] = new YourEntityIs();
         }
 
         public static void HandleResponse(Response response)

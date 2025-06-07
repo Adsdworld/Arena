@@ -1,12 +1,16 @@
 ﻿using Script.Game.Player;
+using Script.Utils;
+using Unity.VisualScripting;
 using UnityEngine;
 using WebSocketSharp;
+using Logger = UnityEngine.Logger;
 
 namespace Script.Camera
 {
     public class MainCamera : MonoBehaviour
     {
-        //public Transform target;
+        [SerializeField] private GameObject target;
+        
         public float followSpeed = 10f;
         public Vector3 offset = new Vector3(0f, 0f, -30f);
         
@@ -33,9 +37,7 @@ namespace Script.Camera
 
         private void LateUpdate()
         {
-            GameObject target = LocalPlayer.Instance?.GetControlledEntity();
-            
-            if (target == null) return;
+            if (target.IsUnityNull()) Log.Info("Target is null, skipping camera update.");
             
             float scroll = UnityEngine.InputSystem.Mouse.current.scroll.ReadValue().y;
             offset.z += scroll * zoomSpeed * Time.deltaTime;
@@ -55,6 +57,11 @@ namespace Script.Camera
 
             transform.position = Vector3.Lerp(transform.position, desiredPosition, followSpeed * Time.deltaTime);
             transform.rotation = Quaternion.Euler(_rotationHandler.GetRotation());
+        }
+
+        public void UpdateMainCameraControlledEntity(GameObject _gameObject)
+        {
+            target = _gameObject;
         }
     }
 }

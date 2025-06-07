@@ -78,7 +78,10 @@ namespace Script.Network.Transport
                 }
                 
                 // Appel du handler approprié
-                ResponseHandlerManager.HandleResponse(response);
+                MainThreadDispatcher.Enqueue(() =>
+                {
+                    ResponseHandlerManager.HandleResponse(response);
+                });
             }
             catch (Exception exception)
             {

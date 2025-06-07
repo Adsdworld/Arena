@@ -9,14 +9,14 @@ namespace Script.Game.Player.Listeners
         [SerializeField] public GameObject player;
         [SerializeField] public EntityComponent playerComponent;
 
-        private ListenerScheduler scheduler;
+        private ListenerScheduler _scheduler;
 
         private void Start()
         {
-            scheduler = FindFirstObjectByType<ListenerScheduler>();
-            if (scheduler != null)
+            _scheduler = FindFirstObjectByType<ListenerScheduler>();
+            if (_scheduler != null)
             {
-                scheduler.RegisterListener(UpdateRotationY);
+                _scheduler.RegisterListener(UpdateRotationY);
             }
             else
             {
@@ -27,15 +27,15 @@ namespace Script.Game.Player.Listeners
 
         private void OnDestroy()
         {
-            if (scheduler != null)
+            if (_scheduler != null)
             {
-                scheduler.UnregisterListener(UpdateRotationY);
+                _scheduler.UnregisterListener(UpdateRotationY);
             }
         }
         
         private void UpdateRotationY()
         {
-            player = LocalPlayer.Instance.ControlledEntity;
+            player = LocalPlayer.Instance.GetControlledEntity();
             playerComponent = LocalPlayer.Instance.GetControlledEntityComponent();
             if (player != null && playerComponent != null)
             {

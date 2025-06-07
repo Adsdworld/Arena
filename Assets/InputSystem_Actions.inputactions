@@ -1024,7 +1024,7 @@
             "id": "c7445629-4ea7-49fd-b0a8-8c4265905ca4",
             "actions": [
                 {
-                    "name": "Clic",
+                    "name": "RightClic",
                     "type": "Button",
                     "id": "6da569bd-8f70-4e0f-bd3b-678394b23388",
                     "expectedControlType": "",
@@ -1086,7 +1086,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Clic",
+                    "action": "RightClic",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

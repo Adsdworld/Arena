@@ -8,7 +8,7 @@ namespace Script.Game.handlers
     {
         public void handle(Response response)
         {
-            Log.Info("Handling Logged Response");
+            /* Only for notify Response from > Login */
         }
     }
 }

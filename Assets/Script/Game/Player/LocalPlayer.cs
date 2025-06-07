@@ -1,5 +1,9 @@
 ﻿using System;
+using Script.Camera;
 using Script.Game.Entity;
+using Script.Game.Player.Controls;
+using Script.Utils;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,11 +14,13 @@ namespace Script.Game.Player
         [SerializeField]
         public static string defaultControlledEntityId = "Entity_default"; //
 
-        [SerializeField] public string ControlledEntityId;
+        [SerializeField] private string ControlledEntityId;
 
-        [SerializeField] public GameObject ControlledEntity;
+        [SerializeField] private GameObject ControlledEntity;
         
         [SerializeField] public GameNameEnum GameName;
+
+        private bool _stopLog;
 
         
         [SerializeField]
@@ -44,6 +50,7 @@ namespace Script.Game.Player
 
             instance = this;
             DontDestroyOnLoad(gameObject);
+            UpDateControlledEntity();
         }
 
         public void Start()
@@ -55,75 +62,48 @@ namespace Script.Game.Player
         {
             UpDateControlledEntity();
             
-            /*// Tester la touche Q (juste pressée)
-            if (Keyboard.current.qKey.wasPressedThisFrame)
-            {
-                long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-                var entity = LocalPlayer.Instance.GetControlledEntityComponent();
-                if (entity != null)
-                {
-                    entity.CooldownQStart = now;
-                    entity.CooldownQEnd = now + 5000; // cooldown 5s
-                }
-            }
-
-            if (Keyboard.current.wKey.wasPressedThisFrame)
-            {
-                long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-                var entity = LocalPlayer.Instance.GetControlledEntityComponent();
-                if (entity != null)
-                {
-                    entity.CooldownWStart = now;
-                    entity.CooldownWEnd = now + 5000; // cooldown 5s
-                }
-            }
-            if (Keyboard.current.eKey.wasPressedThisFrame)
-            {
-                long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-                var entity = LocalPlayer.Instance.GetControlledEntityComponent();
-                if (entity != null)
-                {
-                    entity.CooldownEStart = now;
-                    entity.CooldownEEnd = now + 5000; // cooldown 5s
-                }
-            }
-            if (Keyboard.current.rKey.wasPressedThisFrame)
-            {
-                long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-                var entity = LocalPlayer.Instance.GetControlledEntityComponent();
-                if (entity != null)
-                {
-                    entity.CooldownRStart = now;
-                    entity.CooldownREnd = now + 5000; // cooldown 5s
-                }
-            }*/
          }
         
         private void UpDateControlledEntity()
         {
-            if (ControlledEntity == null || GetControlledEntityId() != ControlledEntity.name)
-            {
-                if (string.IsNullOrEmpty(ControlledEntityId))
-                {
-                    ControlledEntityId = defaultControlledEntityId;
-                }
+            // Si ControlledEntity est valide ET que son ID correspond, on ne fait rien (early return)
+            if (!ControlledEntity.IsUnityNull() && GetControlledEntityId() == ControlledEntity.name)
+                return;
 
-                GameObject entity = GameObject.Find(ControlledEntityId);
-                if (entity != null)
-                {
-                    ControlledEntity = entity;
-                }
-                else
-                {
-                    Debug.LogWarning($"Controlled entity with ID {ControlledEntityId} not found.");
-                }
+            // Si ControlledEntityId est vide, on lui donne la valeur par défaut
+            if (string.IsNullOrEmpty(ControlledEntityId))
+            {
+                ControlledEntityId = defaultControlledEntityId;
             }
 
+            GameObject entity = GameObject.Find(ControlledEntityId);
+            if (!entity.IsUnityNull())
+            {
+                ControlledEntity = entity;
+                UpDateEntityControllers();
+                _stopLog = false;
+            }
+            else
+            {
+                if (!_stopLog)
+                {
+                    Log.Warn($"Controlled entity with name {ControlledEntityId} not found.");
+                    _stopLog = !_stopLog;
+                }
+            }
+        }
+
+
+        private void UpDateEntityControllers()
+        {
+            GameObject.FindFirstObjectByType<MainCamera>().UpdateMainCameraControlledEntity(ControlledEntity);
+            //RightClic.UpdateRightClicEntityController(ControlledEntity);
         }
 
         public void SetControlledEntityId(string id)
         {
             ControlledEntityId = id;
+            UpDateControlledEntity();
         }
 
         public string GetControlledEntityId()
@@ -131,7 +111,7 @@ namespace Script.Game.Player
             return ControlledEntityId;
         }
         
-        public void SetControlledEntity(GameObject gameObject)
+        private void SetControlledEntity(GameObject gameObject)
         {
             ControlledEntity = gameObject;
         }
@@ -145,14 +125,14 @@ namespace Script.Game.Player
         {
             if (ControlledEntity == null)
             {
-                Debug.LogWarning("ControlledEntity is null in GetControlledEntityComponent()");
+                Log.Warn("ControlledEntity is null in GetControlledEntityComponent()");
                 return null;
             }
 
             var component = ControlledEntity.GetComponent<EntityComponent>();
             if (component == null)
             {
-                Debug.LogWarning("EntityComponent not found on ControlledEntity");
+                Log.Warn("EntityComponent not found on ControlledEntity");
             }
 
             return component;

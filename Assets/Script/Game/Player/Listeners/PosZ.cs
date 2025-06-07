@@ -8,15 +8,16 @@ namespace Script.Game.Player.Listeners
     {
         [SerializeField] public GameObject player;
         [SerializeField] public EntityComponent playerComponent;
+        [SerializeField] public float _z;
 
-        private ListenerScheduler scheduler;
+        private ListenerScheduler _scheduler;
 
         private void Start()
         {
-            scheduler = FindFirstObjectByType<ListenerScheduler>();
-            if (scheduler != null)
+            _scheduler = FindFirstObjectByType<ListenerScheduler>();
+            if (_scheduler != null)
             {
-                scheduler.RegisterListener(UpdatePosZ);
+                _scheduler.RegisterListener(UpdatePosZ);
             }
             else
             {
@@ -27,21 +28,21 @@ namespace Script.Game.Player.Listeners
 
         private void OnDestroy()
         {
-            if (scheduler != null)
+            if (_scheduler != null)
             {
-                scheduler.UnregisterListener(UpdatePosZ);
+                _scheduler.UnregisterListener(UpdatePosZ);
             }
         }
 
         private void UpdatePosZ()
         {
-            player = LocalPlayer.Instance.ControlledEntity;
+            player = LocalPlayer.Instance.GetControlledEntity();
             playerComponent = LocalPlayer.Instance.GetControlledEntityComponent();
 
             if (player != null && playerComponent != null)
             {
-                float z = player.transform.position.z;
-                playerComponent.PosZ = z;
+                _z = player.transform.position.z;
+                playerComponent.PosZ = _z;
             }
             else
             {

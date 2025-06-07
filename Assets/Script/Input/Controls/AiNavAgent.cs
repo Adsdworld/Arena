@@ -46,7 +46,7 @@ namespace Script.Input.Controls
             _mainCamera = UnityEngine.Camera.main;
 
             inputActions = new InputSystem_Actions();
-            clickAction = inputActions.Player.Clic;
+            clickAction = inputActions.Player.RightClic;
             clickAction.performed += OnClick;
         }
 

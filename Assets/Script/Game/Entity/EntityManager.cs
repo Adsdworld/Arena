@@ -52,9 +52,16 @@ namespace Script.Game.Entity
                 }
                 else
                 {
+                    /* IMPORTANTE :
+                     * Avant de déplacer la capsule désactiver navmesh agent qui force Y sur le plan, le colider et le rigidbody au cas ou
+                     */
+                    
+                    Log.Info("[EntityManager] Instanciation de l'entité : " + serverEntity.Id + " at " + serverEntity.PosX + ", " + serverEntity.PosY + ", " + serverEntity.PosZ);
+                    entityPrefab.transform.position = new Vector3(serverEntity.PosX, serverEntity.PosY, serverEntity.PosZ);
                     GameObject newGo = Instantiate(entityPrefab);
+                    newGo.GetComponent<EntityComponent>().Initialize(serverEntity);
                     newGo.name = $"Entity_{serverEntity.Id}";
-
+                    
                     entityGameObjects[serverEntity.Id] = newGo;
 
                     Log.Info("[EntityManager] Nouvelle entité instanciée : " + serverEntity.Name + " (ID: " + serverEntity.Id + ")");

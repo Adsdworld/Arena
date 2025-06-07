@@ -8,9 +8,7 @@ namespace Script.Game.handlers
     {
         public void handle(Response response)
         {
-            Log.Info("Handling Joined Response");
-
-            LocalPlayer.Instance.GameName = response.GameName;
+            /* Only for notify purpose */
         }
     }
 }
