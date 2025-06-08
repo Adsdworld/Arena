@@ -66,6 +66,7 @@ namespace Script.Game.Entity
                     newGo.GetComponent<NavMeshAgent>().enabled = false;
                     
                     newGo.transform.position = new Vector3(serverEntity.PosX, serverEntity.PosY, serverEntity.PosZ);
+                    newGo.transform.rotation = Quaternion.Euler(0, serverEntity.RotationY, 0);
                     newGo.GetComponent<EntityComponent>().Initialize(serverEntity);
                     newGo.name = $"Entity_{serverEntity.Id}";
                     
