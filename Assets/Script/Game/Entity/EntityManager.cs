@@ -57,10 +57,17 @@ namespace Script.Game.Entity
                      */
                     
                     Log.Info("[EntityManager] Instanciation de l'entité : " + serverEntity.Id + " at " + serverEntity.PosX + ", " + serverEntity.PosY + ", " + serverEntity.PosZ);
-                    entityPrefab.transform.position = new Vector3(serverEntity.PosX, serverEntity.PosY, serverEntity.PosZ);
+                    
+                    entityPrefab.GetComponent<Rigidbody>().isKinematic = true;
+                    entityPrefab.GetComponent<Collider>().enabled = false;
+                    
                     GameObject newGo = Instantiate(entityPrefab);
+                    newGo.transform.position = new Vector3(serverEntity.PosX, serverEntity.PosY, serverEntity.PosZ);
                     newGo.GetComponent<EntityComponent>().Initialize(serverEntity);
                     newGo.name = $"Entity_{serverEntity.Id}";
+                    
+                    entityPrefab.GetComponent<Rigidbody>().isKinematic = false;
+                    entityPrefab.GetComponent<Collider>().enabled = true;
                     
                     entityGameObjects[serverEntity.Id] = newGo;
 

@@ -41,7 +41,7 @@ namespace Script.Game.Player.Controls
                     entityComponent.CooldownQStart = now;
                     var message = ListenerScheduler.Instance.CreateMessage();
                     message.SetAction(ActionEnum.CooldownStart);
-                    message.SetCooldownWStart(now);
+                    message.SetCooldownQStart(now);
                     message.Send();
                 }
             }
