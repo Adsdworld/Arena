@@ -11,7 +11,7 @@ namespace Script.Utils
     public static class Log
     {
         // ignore warning : Name 'logFilePath' does not match rule 'Static readonly fields (private)'. Suggested name is 'LOGFilePath'.
-        private static readonly string logFilePath = Path.Combine(Application.persistentDataPath, "arena.log.txt");
+        private static string logFilePath = null;
 
         // Thread-safe queue pour stocker les logs
         // ignore warning : Name 'logQueue' does not match rule 'Static readonly fields (private)'. Suggested name is 'LOGQueue'.
@@ -90,6 +90,18 @@ namespace Script.Utils
                 await logSemaphore.WaitAsync();
                 try
                 {
+                    if (logFilePath == null)
+                    {
+                        var tcs = new TaskCompletionSource<string>();
+
+                        MainThreadDispatcher.Enqueue(() =>
+                        {
+                            tcs.SetResult(Application.persistentDataPath);
+                        });
+
+                        logFilePath = Path.Combine(await tcs.Task, "arena.log.txt");
+                    }
+                    
                     var directory = Path.GetDirectoryName(logFilePath);
                     if (!Directory.Exists(directory) && directory != null)
                     {

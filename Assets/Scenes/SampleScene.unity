@@ -2568,7 +2568,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1399946663}
   - component: {fileID: 1399946662}
-  - component: {fileID: 1399946661}
   - component: {fileID: 1399946664}
   m_Layer: 0
   m_Name: Main
@@ -2577,19 +2576,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1399946661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1399946660}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 972bfdf45922f03489f0f8430b027d13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  production: 0
 --- !u!114 &1399946662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3324,6 +3310,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2065899468730338075, guid: 08a4fece3e56ccb429ac06e7a281a31f, type: 3}
   m_PrefabInstance: {fileID: 2725711242415895410}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2044435552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2044435553}
+  - component: {fileID: 2044435554}
+  m_Layer: 0
+  m_Name: UnityWebSocket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2044435553
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044435552}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 702.4307, y: 0, z: 725.47876}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2044435554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044435552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 972bfdf45922f03489f0f8430b027d13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  production: 0
 --- !u!1 &2112472569
 GameObject:
   m_ObjectHideFlags: 0
@@ -3524,6 +3555,7 @@ SceneRoots:
   - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}
+  - {fileID: 2044435553}
   - {fileID: 164155573}
   - {fileID: 1399946663}
   - {fileID: 1569243371}

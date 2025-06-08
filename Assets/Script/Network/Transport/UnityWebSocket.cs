@@ -9,6 +9,7 @@ using System.Collections;
 using Newtonsoft.Json;
 using Script.Game.handlers;
 using Script.Network.response;
+using Unity.VisualScripting;
 
 
 namespace Script.Network.Transport
@@ -17,17 +18,17 @@ namespace Script.Network.Transport
     {
         public static UnityWebSocket Instance { get; private set; }
 
-        private WebSocket _websocket;
-        public Boolean production;
-        private bool _shouldReconnect = true;
-        private bool _hasClosed = false;
-        private bool _isReconnecting = false;
+        [SerializeField] private static WebSocket _websocket;
+        public bool production;
+        private static bool _shouldReconnect = true;
+        private static bool _logEnabled = true;
 
         
         private void Awake()
         {
             if (Instance != null && Instance != this)
             {
+                if (_logEnabled) Log.Info("Destroying " + gameObject.name);
                 Destroy(gameObject);
                 return;
             }
@@ -38,7 +39,7 @@ namespace Script.Network.Transport
 
         private void Start() // Do not add code here, add code OnOpen(), OnMessage(), OnError(), OnClose().
         {
-            //Log.Info("Initialisation du client WebSocket...");
+            if (_logEnabled) Log.Info("Start Initialisation du client WebSocket...");
             
             MessageService.MessageSender = new UnityWebSocketMessageSender();
 
@@ -54,7 +55,8 @@ namespace Script.Network.Transport
 
         private void OnOpen(object sender, EventArgs e)
         {
-            Log.Info("Connexion WebSocket établie.");
+            _logEnabled = true;
+            if (_logEnabled) Log.Info("OnOpen Connexion WebSocket établie.");
             MainThreadDispatcher.Enqueue(() =>
             {
                 Message.Message message = new Message.Message();
@@ -106,20 +108,24 @@ namespace Script.Network.Transport
 
         private void OnError(object sender, ErrorEventArgs e)
         {
-            Log.Failure("Erreur WebSocket : " + e.Message);
+            Log.Failure("OnError Erreur WebSocket : " + e.Message);
         }
 
         private void OnClose(object sender, CloseEventArgs e)
         {
-            Log.Info("Connexion WebSocket fermée. Code: " + e.Code);
+            if (_logEnabled) Log.Info("OnClose Connexion WebSocket fermée. Code: " + e.Code);
 
-            if (_shouldReconnect && UnityWebSocket.Instance != null)
+            _websocket.OnOpen -= OnOpen;
+            _websocket.OnMessage -= OnMessage;
+            _websocket.OnError -= OnError;
+            _websocket.OnClose -= OnClose;
+            _websocket = null;
+            
+            _logEnabled = false;
+
+            if (_shouldReconnect)
             {
-                MainThreadDispatcher.Enqueue((() =>
-                {
-                    //Log.Info("WebSocket OnClose");
-                    StartCoroutine(TryReconnect());
-                }));
+                Start();
             }
         }
 
@@ -138,7 +144,7 @@ namespace Script.Network.Transport
                 return;
             }
 
-            if (Instance._websocket == null || !Instance._websocket.IsAlive)
+            if (_websocket == null || !_websocket.IsAlive)
             {
                 Log.Warn("WebSocket non connecté.");
                 return;
@@ -154,7 +160,7 @@ namespace Script.Network.Transport
 
             try
             {
-                Instance._websocket.Send(json);
+                _websocket.Send(json);
                 Log.Info("Message envoyé au serveur : " + json);
             }
             catch (Exception e)
@@ -166,76 +172,15 @@ namespace Script.Network.Transport
 
         private void OnDestroy()
         {
-            CloseWebSocket();
+            Log.Info("OnDestroy >> CloseWebSocket()");
+            _websocket.Close(CloseStatusCode.Normal);
         }
 
         private void OnApplicationQuit()
         {
+            Log.Info("OnApplicationQuit >> CloseWebSocket()");
             _shouldReconnect = false;
-            CloseWebSocket();
-        }
-
-        private void CloseWebSocket()
-        {
-            if (_hasClosed || _websocket == null)
-                return;
-
-            _hasClosed = true;
-
-            _websocket.OnOpen -= OnOpen;
-            _websocket.OnMessage -= OnMessage;
-            _websocket.OnError -= OnError;
-            _websocket.OnClose -= OnClose;
-
-            if (_websocket.IsAlive)
-                _websocket.Close();
-
-            _websocket = null;
-            Log.Info("WebSocket fermé.");
-        }
-        
-        private IEnumerator TryReconnect()
-        {
-            if (_isReconnecting)
-            {
-                //Log.Info("Déjà en train de tenter une reconnexion.");
-                yield break;
-            }
-
-            _isReconnecting = true;
-            //Log.Info("TryReconnect() STARTED");
-            Log.Info("Tentative de reconnexion...");
-
-            while (_shouldReconnect && (_websocket == null || !_websocket.IsAlive))
-            {
-                //Log.Info("Tentative de reconnexion...");
-
-                if (_websocket != null)
-                {
-                    _websocket.OnOpen -= OnOpen;
-                    _websocket.OnMessage -= OnMessage;
-                    _websocket.OnError -= OnError;
-                    _websocket.OnClose -= OnClose;
-
-                    _websocket = null;
-                }
-
-                _websocket = production
-                    ? new WebSocket("ws://arenafr.servegame.com:54099")
-                    : new WebSocket("ws://localhost:54099");
-
-                _websocket.OnOpen += OnOpen;
-                _websocket.OnMessage += OnMessage;
-                _websocket.OnError += OnError;
-                _websocket.OnClose += OnClose;
-
-                _websocket.ConnectAsync();
-
-                yield return new WaitForSeconds(1f);
-            }
-
-            Log.Info("Reconnexion réussie !");
-            _isReconnecting = false; 
+            _websocket.Close(CloseStatusCode.Normal);
         }
     }
 }
