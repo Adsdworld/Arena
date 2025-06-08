@@ -17,6 +17,8 @@ namespace Script.Game.Player.Controls
         
         public UnityEngine.Camera _mainCamera;
         
+        public LayerMask layerMask;
+        
         private void Awake()
         {
             _controls = new InputSystem_Actions();
@@ -58,7 +60,7 @@ namespace Script.Game.Player.Controls
 
             Vector2 mousePosition = Mouse.current.position.ReadValue();
             Ray ray = _mainCamera.ScreenPointToRay(mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            if (Physics.Raycast(ray, out RaycastHit hit, 100, layerMask))
             {
                 _agent.SetDestination(hit.point);
                 Quaternion targetRotation = Quaternion.LookRotation(_agent.desiredVelocity);
