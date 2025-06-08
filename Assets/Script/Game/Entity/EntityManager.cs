@@ -2,6 +2,7 @@
 using UnityEngine;
 using Script.Network.response;
 using Script.Utils;
+using UnityEngine.AI;
 
 namespace Script.Game.Entity
 {
@@ -58,16 +59,19 @@ namespace Script.Game.Entity
                     
                     Log.Info("[EntityManager] Instanciation de l'entité : " + serverEntity.Id + " at " + serverEntity.PosX + ", " + serverEntity.PosY + ", " + serverEntity.PosZ);
                     
-                    entityPrefab.GetComponent<Rigidbody>().isKinematic = true;
-                    entityPrefab.GetComponent<Collider>().enabled = false;
-                    
                     GameObject newGo = Instantiate(entityPrefab);
+                    
+                    newGo.GetComponent<Rigidbody>().isKinematic = true;
+                    newGo.GetComponent<Collider>().enabled = false;
+                    newGo.GetComponent<NavMeshAgent>().enabled = false;
+                    
                     newGo.transform.position = new Vector3(serverEntity.PosX, serverEntity.PosY, serverEntity.PosZ);
                     newGo.GetComponent<EntityComponent>().Initialize(serverEntity);
                     newGo.name = $"Entity_{serverEntity.Id}";
                     
-                    entityPrefab.GetComponent<Rigidbody>().isKinematic = false;
-                    entityPrefab.GetComponent<Collider>().enabled = true;
+                    newGo.GetComponent<Rigidbody>().isKinematic = false;
+                    newGo.GetComponent<Collider>().enabled = true;
+                    newGo.GetComponent<NavMeshAgent>().enabled = true;
                     
                     entityGameObjects[serverEntity.Id] = newGo;
 
