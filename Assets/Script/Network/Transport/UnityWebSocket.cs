@@ -173,7 +173,10 @@ namespace Script.Network.Transport
         private void OnDestroy()
         {
             Log.Info("OnDestroy >> CloseWebSocket()");
-            _websocket.Close(CloseStatusCode.Normal, "OnDestroy");
+            if (_websocket != null)
+            {
+                _websocket.Close(CloseStatusCode.Normal, "OnDestroy");
+            }
         }
 
         private void OnApplicationQuit()
