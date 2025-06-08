@@ -173,14 +173,14 @@ namespace Script.Network.Transport
         private void OnDestroy()
         {
             Log.Info("OnDestroy >> CloseWebSocket()");
-            _websocket.Close(CloseStatusCode.Normal);
+            _websocket.Close(CloseStatusCode.Normal, "OnDestroy");
         }
 
         private void OnApplicationQuit()
         {
             Log.Info("OnApplicationQuit >> CloseWebSocket()");
             _shouldReconnect = false;
-            _websocket.Close(CloseStatusCode.Normal);
+            _websocket.Close(CloseStatusCode.Normal, "OnApplicationQuit");
         }
     }
 }
