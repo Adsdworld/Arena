@@ -18,24 +18,24 @@ namespace Script.Game.Player.Listeners
             _scheduler = FindFirstObjectByType<ListenerScheduler>();
             if (!_scheduler.IsUnityNull())
             {
-                _scheduler.RegisterListener(UpdatePosZ);
+                _scheduler.RegisterListener(UpdatePosY);
             }
             else
             {
                 Debug.LogWarning("ListenerScheduler not found in scene.");
             }
-            UpdatePosZ();
+            UpdatePosY();
         }
 
         private void OnDestroy()
         {
             if (!_scheduler.IsUnityNull())
             {
-                _scheduler.UnregisterListener(UpdatePosZ);
+                _scheduler.UnregisterListener(UpdatePosY);
             }
         }
 
-        private void UpdatePosZ()
+        private void UpdatePosY()
         {
             player = LocalPlayer.Instance.GetControlledEntity();
             playerComponent = LocalPlayer.Instance.GetControlledEntityComponent();
@@ -43,7 +43,7 @@ namespace Script.Game.Player.Listeners
             if (!player.IsUnityNull() && !playerComponent.IsUnityNull())
             {
                 _y = player.transform.position.y;
-                playerComponent.PosZ = _y;
+                playerComponent.PosY = _y;
             }
             else
             {
