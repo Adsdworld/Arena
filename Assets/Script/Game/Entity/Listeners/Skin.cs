@@ -60,6 +60,14 @@ namespace Script.Game.Entity.Listeners
         {
             CurrentSkin = null;
             _skinState = "Component Destroyed";
+            if (SkinContainer.childCount > 0)
+            {
+                foreach (Transform child in SkinContainer)
+                {
+                    Destroy(child.gameObject);
+                }
+            }
+            CurrentSkin = null;
         }
 
         public void UpdateSkin()
@@ -123,9 +131,9 @@ namespace Script.Game.Entity.Listeners
 
                 GameObject skinRoot = new GameObject(name_ + "_Skin");
                 skinRoot.transform.SetParent(SkinContainer, false);
-                skinRoot.transform.localPosition = Vector3.zero;
+                skinRoot.transform.localPosition = new Vector3(_entityComponent.PosSkinX, _entityComponent.PosSkinY, _entityComponent.PosSkinZ);
                 skinRoot.transform.localRotation = Quaternion.identity;
-                skinRoot.transform.localScale = Vector3.one * 0.005f;
+                skinRoot.transform.localScale = Vector3.one * _entityComponent.SkinScale;
 
                 bool instantiated = await gltf.InstantiateMainSceneAsync(skinRoot.transform);
                 if (!instantiated)
