@@ -1,3 +1,4 @@
+using Script.Utils;
 using UnityEngine;
 
 public class HideTerrain : MonoBehaviour
