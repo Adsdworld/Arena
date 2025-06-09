@@ -70,9 +70,9 @@ namespace Script.Game.Entity
                     newGo.GetComponent<EntityComponent>().Initialize(serverEntity);
                     newGo.name = $"Entity_{serverEntity.Id}";
                     
-                    newGo.GetComponent<Rigidbody>().isKinematic = false;
-                    newGo.GetComponent<Collider>().enabled = true;
-                    newGo.GetComponent<NavMeshAgent>().enabled = true;
+                    newGo.GetComponent<Rigidbody>().isKinematic = serverEntity.Rigidbody_.IsKinematic;
+                    newGo.GetComponent<Collider>().enabled = serverEntity.Collider_.Enabled;
+                    newGo.GetComponent<NavMeshAgent>().enabled = serverEntity.NavMeshAgent_.Enabled;
                     
                     entityGameObjects[serverEntity.Id] = newGo;
 
