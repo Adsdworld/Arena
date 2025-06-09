@@ -41,6 +41,12 @@ namespace Script.Game.Entity
         public float PosZ { get; set; }
         [JsonProperty("posY")]
         public float PosY { get; set; }
+        [JsonProperty("posSkinX")]
+        public float PosSkinX { get; set; }
+        [JsonProperty("posSkinZ")]
+        public float PosSkinZ { get; set; }
+        [JsonProperty("posSkinY")]
+        public float PosSkinY { get; set; }
         [JsonProperty("posXDesired")]
         public float PosXDesired { get; set; }
         [JsonProperty("posZDesired")]

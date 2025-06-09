@@ -15,6 +15,9 @@
         float PosX { get; set; }
         float PosZ { get; set; }
         float PosY { get; set; }
+        float PosSkinX { get; set; }
+        float PosSkinZ { get; set; }
+        float PosSkinY { get; set; }
         float PosXDesired { get; set; }
         float PosZDesired { get; set; }
         float PosYDesired { get; set; }

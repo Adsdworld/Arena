@@ -1,5 +1,7 @@
 ﻿using Script.Game.Core;
+using Script.Game.Entity.Listeners;
 using Script.Game.Player.Controls;
+using Script.Game.Player.Listeners;
 using Script.Utils;
 using UnityEngine;
 
@@ -39,7 +41,19 @@ namespace Script.Game.Entity
         [SerializeField] private long _cooldownRMs;
 
         public string Id { get => _id; set => _id = value; }
-        public string Name { get => _name; set => _name = value; }
+
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                _name = value;
+                var SkinComponent = GetComponentInChildren<Skin>();
+                if (SkinComponent != null) SkinComponent.UpdateSkin();
+                else Log.Warn("Please check if enity prefab have Skin.cs: ");
+            }
+        }
+
         public int Health { get => _health; set => _health = value; }
         public int MaxHealth { get => _maxHealth; set => _maxHealth = value; }
         public int Armor { get => _armor; set => _armor = value; }
@@ -60,6 +74,9 @@ namespace Script.Game.Entity
         public float PosX { get => _posX; set => _posX = value; }
         public float PosZ { get => _posZ; set => _posZ = value; }
         public float PosY { get => _posY; set => _posY = value; }
+        public float PosSkinX { get; set; }
+        public float PosSkinZ { get; set; }
+        public float PosSkinY { get; set; }
         public float PosXDesired { get => _posXDesired; set => _posXDesired = value; }
         public float PosZDesired { get => _posZDesired; set => _posZDesired = value; }
         public float PosYDesired { get => _posYDesired; set => _posYDesired = value; }
@@ -99,6 +116,9 @@ namespace Script.Game.Entity
             PosX = data.PosX;
             PosZ = data.PosZ;
             PosY = data.PosY;
+            PosSkinX = data.PosSkinX;
+            PosSkinZ = data.PosSkinZ;
+            PosSkinY = data.PosSkinY;
             PosXDesired = data.PosXDesired;
             PosZDesired = data.PosZDesired;
             RotationY = data.RotationY;
@@ -134,6 +154,9 @@ namespace Script.Game.Entity
                 //PosX = livingEntity.PosX;
                 //PosZ = livingEntity.PosZ;
                 //PosY = livingEntity.PosY;
+                PosSkinX = livingEntity.PosSkinX;
+                PosSkinZ = livingEntity.PosSkinZ;
+                PosSkinY = livingEntity.PosSkinY;
                 //PosXDesired = livingEntity.PosXDesired;
                 //PosZDesired = livingEntity.PosZDesired;
                 //PosYDesired = livingEntity.PosYDesired;
@@ -167,6 +190,10 @@ namespace Script.Game.Entity
                 Moving = livingEntity.Moving;
                 PosX = livingEntity.PosX;
                 PosZ = livingEntity.PosZ;
+                PosY = livingEntity.PosY;
+                PosSkinX = livingEntity.PosSkinX;
+                PosSkinZ = livingEntity.PosSkinZ;
+                PosSkinY = livingEntity.PosSkinY;
                 PosXDesired = livingEntity.PosXDesired;
                 PosZDesired = livingEntity.PosZDesired;
                 PosYDesired = livingEntity.PosYDesired;
