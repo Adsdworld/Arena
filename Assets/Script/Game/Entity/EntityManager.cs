@@ -69,6 +69,7 @@ namespace Script.Game.Entity
                     newGo.transform.rotation = Quaternion.Euler(0, serverEntity.RotationY, 0);
                     newGo.GetComponent<EntityComponent>().Initialize(serverEntity);
                     newGo.name = $"Entity_{serverEntity.Id}";
+                    newGo.transform.localScale = Vector3.one * serverEntity.Transform_.Scale;
                     
                     newGo.GetComponent<Rigidbody>().isKinematic = serverEntity.Rigidbody_.IsKinematic;
                     newGo.GetComponent<Collider>().enabled = serverEntity.Collider_.Enabled;

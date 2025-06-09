@@ -87,5 +87,7 @@ namespace Script.Game.Entity
         public EntityRigidbody Rigidbody_ { get; set; }
         [JsonProperty("navMeshAgent")]
         public EntityNavMeshAgent NavMeshAgent_ { get; set; }
+        [JsonProperty("transform")]
+        public EntityTransform Transform_ { get; set; }
     }
 }
