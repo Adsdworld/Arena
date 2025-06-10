@@ -89,6 +89,10 @@ namespace Script.Game.Entity
         [JsonProperty("cooldownRMs")]
         public long CooldownRMs { get; set; }
         
+        /**
+         * Components
+         */
+        
         [JsonProperty("collider")]
         public EntityCollider Collider_ { get; set; }
         [JsonProperty("rigidbody")]
@@ -97,5 +101,8 @@ namespace Script.Game.Entity
         public EntityNavMeshAgent NavMeshAgent_ { get; set; }
         [JsonProperty("transform")]
         public EntityTransform Transform_ { get; set; }
+        
+        [JsonProperty("RuntimeTypeAdapterFactoryClazz")]
+        public string RuntimeTypeAdapterFactoryClazz { get; set; }
     }
 }

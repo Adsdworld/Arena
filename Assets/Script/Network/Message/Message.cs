@@ -4,6 +4,7 @@ using Script.Game.Player;
 using UnityEngine;
 using Newtonsoft.Json;
 using Script.Game.Core;
+using Script.Game.Entity;
 using Script.Utils;
 
 
@@ -26,37 +27,12 @@ namespace Script.Network.Message
         [JsonProperty("gameName")]
         public string GameNameEnum => _gameName.GetGameName();  // Pareil
         
-        [JsonProperty("posX")]
-        private float? _x;
-        
-        [JsonProperty("posZ")]
-        private float? _z;
-        
-        [JsonProperty("posY")]
-        private float? _y;
-        
-        [JsonProperty("posXDesired")]
-        private float? _posXDesired;
-        
-        [JsonProperty("posZDesired")]
-        private float? _posZDesired;
-        
-        [JsonProperty("posYDesired")]
-        private float? _posYDesired;
-        
-        [JsonProperty("rotationY")]
-        private float? _rotationY;
         
         [JsonProperty("timestamp")]
         private long _timestamp;
-
-        [JsonProperty("cooldownQStart")] private long _cooldownQStart;
-        [JsonProperty("cooldownWStart")] private long _cooldownWStart;
-        [JsonProperty("cooldownEStart")] private long _cooldownEStart;
-        [JsonProperty("cooldownRStart")] private long _cooldownRStart;
         
-        
-
+        [JsonProperty("livingEntity")]
+        LivingEntity _livingEntity;
         
         /// <summary>
         /// uuid is send by default, it is used to identify the player.
@@ -101,31 +77,14 @@ namespace Script.Network.Message
             _gameName = gameNameEnum;
         }
         
-        public void SetX(float? x)
+        public LivingEntity GetLivingEntity()
         {
-            _x = x;
+            return _livingEntity;
         }
-        public void SetZ(float? z)
+        public void SetLivingEntity(LivingEntity livingEntity)
         {
-            _z = z;
+            _livingEntity = livingEntity;
         }
-        public void SetY(float? y)
-        {
-            _y = y;
-        }
-        public void SetPosXDesired(float? posXDesired)
-        {
-            _posXDesired = posXDesired;
-        }
-        public void SetPosZDesired(float? posZDesired)
-        {
-            _posZDesired = posZDesired;
-        }
-        public void SetPosYDesired(float? posYDesired)
-        {
-            _posYDesired = posYDesired;
-        }
-        
         
         public long GetTimestamp()
         {
@@ -136,27 +95,6 @@ namespace Script.Network.Message
             _timestamp = timestamp;
         }
         
-        public void SetCooldownQStart(long cooldownQStart)
-        {
-            _cooldownQStart = cooldownQStart;
-        }
-        public void SetCooldownWStart(long cooldownWStart)
-        {
-            _cooldownWStart = cooldownWStart;
-        }
-        public void SetCooldownEStart(long cooldownEStart)
-        {
-            _cooldownEStart = cooldownEStart;
-        }
-        public void SetCooldownRStart(long cooldownRStart)
-        {
-            _cooldownRStart = cooldownRStart;
-        }
-        
-        public void SetRotationY(float? rotationY)
-        {
-            _rotationY = rotationY;
-        }
 
         public override string ToString()
         {

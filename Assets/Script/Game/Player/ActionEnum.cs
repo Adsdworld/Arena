@@ -32,6 +32,11 @@ namespace Script.Game.Player
         /// </summary>
         CooldownStart,
         
+        /// <summary>
+        ///
+        /// </summary>
+        PlayerStateUpdate,
+        
         
     }
 
@@ -47,6 +52,7 @@ namespace Script.Game.Player
                 ActionEnum.CloseGame => "Close Game",
                 ActionEnum.WhatIsMyEntity => "What Is My Entity",
                 ActionEnum.CooldownStart => "Cooldown Start",
+                ActionEnum.PlayerStateUpdate => "Player State Update",
                 _ => null
             };
         }

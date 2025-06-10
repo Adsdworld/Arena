@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
+using System.Threading;
+using Newtonsoft.Json;
 using Script.Game.Entity;
 using Script.Network.Message;
+using Script.Utils;
 
 namespace Script.Game.Player.Listeners
 {
@@ -15,8 +18,12 @@ namespace Script.Game.Player.Listeners
 
         // Liste des listeners à déclencher
         private List<Action> listeners = new();
-        
         public static ListenerScheduler Instance { get; private set; }
+        
+        [SerializeField] private string entityId;
+        [SerializeField] private EntityComponent entityComponent;
+        [SerializeField] private LivingEntity livingEntity;
+
 
         private void Awake()
         {
@@ -32,7 +39,7 @@ namespace Script.Game.Player.Listeners
             if (timer >= interval)
             {
                 timer = 0f;
-                TriggerListeners();
+                SendLocalPlayerUpdate();
             }
         }
 
@@ -55,32 +62,27 @@ namespace Script.Game.Player.Listeners
                 listener.Invoke();
             }
         }
+        
+        public void UpdateListenerSchedulerEntityController(GameObject agameObject)
+        {
+            entityId = LocalPlayer.Instance.GetControlledEntityId();
+            entityComponent = agameObject.GetComponent<EntityComponent>();
+        }
 
-        public Message CreateMessage()
+        public void SendLocalPlayerUpdate()
         {
             TriggerListeners();
-
-            var localPlayer = LocalPlayer.Instance;
+            if (entityId != LocalPlayer.defaultControlledEntityId)
+            {
+                livingEntity = entityComponent.ToLivingEntity();
             
-            var entity = localPlayer.GetControlledEntityComponent();
-            Message message = new Message();
+                Message message = new Message();
+                message.SetAction(ActionEnum.PlayerStateUpdate);
+                message.SetLivingEntity(livingEntity);
             
-            message.SetGameNameEnum(localPlayer.GameName);
-            
-            message.SetX(entity.PosX);
-            message.SetZ(entity.PosZ);
-            message.SetY(entity.PosY);
-            message.SetRotationY(entity.RotationY);
-            message.SetPosXDesired(entity.PosXDesired);
-            message.SetPosZDesired(entity.PosZDesired);
-            message.SetPosYDesired(entity.PosYDesired);
-
-            message.SetCooldownQStart(entity.CooldownQStart);
-            message.SetCooldownWStart(entity.CooldownWStart);
-            message.SetCooldownEStart(entity.CooldownEStart);
-            message.SetCooldownRStart(entity.CooldownRStart);
-
-            return message;
+                message.SetGameNameEnum(LocalPlayer.Instance.GameName);
+                message.Send();
+            }
         }
     }
 }

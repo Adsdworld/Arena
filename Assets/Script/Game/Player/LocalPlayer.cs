@@ -2,6 +2,7 @@
 using Script.Camera;
 using Script.Game.Entity;
 using Script.Game.Player.Controls;
+using Script.Game.Player.Listeners;
 using Script.Utils;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -97,6 +98,7 @@ namespace Script.Game.Player
         private void UpDateEntityControllers()
         {
             GameObject.FindFirstObjectByType<MainCamera>().UpdateMainCameraControlledEntity(ControlledEntity);
+            GameObject.FindAnyObjectByType<ListenerScheduler>().UpdateListenerSchedulerEntityController(ControlledEntity);
             GameObject.FindAnyObjectByType<RightClic>().UpdateRightClicEntityController(ControlledEntity);
             GameObject.FindAnyObjectByType<Q>().UpdateQEntityController(ControlledEntity);
             GameObject.FindAnyObjectByType<W>().UpdateWEntityController(ControlledEntity);

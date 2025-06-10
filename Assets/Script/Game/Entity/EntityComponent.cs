@@ -1,4 +1,5 @@
-﻿using Script.Game.Core;
+﻿using Newtonsoft.Json;
+using Script.Game.Core;
 using Script.Game.Entity.Listeners;
 using Script.Game.Player.Controls;
 using Script.Game.Player.Listeners;
@@ -9,38 +10,53 @@ namespace Script.Game.Entity
 {
     public class EntityComponent : MonoBehaviour, ILivingEntity
     {
-        [SerializeField] private string _id;
-        [SerializeField] private string _name;
-        [SerializeField] private int _health;
-        [SerializeField] private int _maxHealth;
-        [SerializeField] private int _armor;
-        [SerializeField] private int _magicResist;
-        [SerializeField] private int _attackDamage;
-        [SerializeField] private int _abilityPower;
-        [SerializeField] private float _moveSpeed;
-        [SerializeField] private bool _moving;
-        [SerializeField] private float _posX;
-        [SerializeField] private float _posZ;
-        [SerializeField] private float _posY;
-        [SerializeField] private float _skinScale;
-        [SerializeField] private float _posXDesired;
-        [SerializeField] private float _posZDesired;
-        [SerializeField] private float _posYDesired;
-        [SerializeField] private float _rotationY;
-        [SerializeField] private int _team;
-        [SerializeField] private long _cooldownQStart;
-        [SerializeField] private long _cooldownWStart;
-        [SerializeField] private long _cooldownEStart;
-        [SerializeField] private long _cooldownRStart;
-        [SerializeField] private long _cooldownQEnd;
-        [SerializeField] private long _cooldownWEnd;
-        [SerializeField] private long _cooldownEEnd;
-        [SerializeField] private long _cooldownREnd;
-        [SerializeField] private long _cooldownQMs;
-        [SerializeField] private long _cooldownWMs;
-        [SerializeField] private long _cooldownEMs;
-        [SerializeField] private long _cooldownRMs;
+        [SerializeField] [JsonProperty("id")] private string _id;
+        [SerializeField] [JsonProperty("name")] private string _name;
+        [SerializeField] [JsonProperty("health")] private int _health;
+        [SerializeField] [JsonProperty("maxHealth")] private int _maxHealth;
+        [SerializeField] [JsonProperty("armor")] private int _armor;
+        [SerializeField] [JsonProperty("magicResist")] private int _magicResist;
+        [SerializeField] [JsonProperty("attackDamage")] private int _attackDamage;
+        [SerializeField] [JsonProperty("abilityPower")] private int _abilityPower;
+        
+        [SerializeField] [JsonProperty("moveSpeed")] private float _moveSpeed;
+        [SerializeField] [JsonProperty("moving")] private bool _moving;
+        [SerializeField] [JsonProperty("posX")] private float _posX;
+        [SerializeField] [JsonProperty("posZ")] private float _posZ;
+        [SerializeField] [JsonProperty("posY")] private float _posY;
+        [SerializeField] [JsonProperty("posSkinX")] private float _posSkinX;
+        [SerializeField] [JsonProperty("posSkinZ")] private float _posSkinZ;
+        [SerializeField] [JsonProperty("posSkinY")] private float _posSkinY;
+        [SerializeField] [JsonProperty("skinScale")] private float _skinScale;
+        [SerializeField] [JsonProperty("posXDesired")] private float _posXDesired;
+        [SerializeField] [JsonProperty("posZDesired")] private float _posZDesired;
+        [SerializeField] [JsonProperty("posYDesired")] private float _posYDesired;
+        [SerializeField] [JsonProperty("rotationY")] private float _rotationY;
+        [SerializeField] [JsonProperty("team")] private int _team;
+        
+        [SerializeField] [JsonProperty("cooldownQStart")] private long _cooldownQStart;
+        [SerializeField] [JsonProperty("cooldownWStart")] private long _cooldownWStart;
+        [SerializeField] [JsonProperty("cooldownEStart")] private long _cooldownEStart;
+        [SerializeField] [JsonProperty("cooldownRStart")] private long _cooldownRStart;
+        [SerializeField] [JsonProperty("cooldownQEnd")] private long _cooldownQEnd;
+        [SerializeField] [JsonProperty("cooldownWEnd")] private long _cooldownWEnd;
+        [SerializeField] [JsonProperty("cooldownEEnd")] private long _cooldownEEnd;
+        [SerializeField] [JsonProperty("cooldownREnd")] private long _cooldownREnd;
+        [SerializeField] [JsonProperty("cooldownQMs")] private long _cooldownQMs;
+        [SerializeField] [JsonProperty("cooldownWMs")] private long _cooldownWMs;
+        [SerializeField] [JsonProperty("cooldownEMs")] private long _cooldownEMs;
+        [SerializeField] [JsonProperty("cooldownRMs")] private long _cooldownRMs;
 
+        [JsonIgnore]
+        public EntityCollider Collider_ { get; set; }
+        [JsonIgnore]
+        public EntityRigidbody Rigidbody_ { get; set; }
+        [JsonIgnore]
+        public EntityNavMeshAgent NavMeshAgent_ { get; set; }
+        [JsonIgnore]
+        public EntityTransform Transform_ { get; set; }
+        
+        
         public string Id { get => _id; set => _id = value; }
 
         public string Name
@@ -210,6 +226,49 @@ namespace Script.Game.Entity
                 CooldownEMs = livingEntity.CooldownEMs;
                 CooldownRMs = livingEntity.CooldownRMs;
             }
+        }
+
+
+        public LivingEntity ToLivingEntity()
+        {
+            LivingEntity livingEntity = new LivingEntity();
+
+            livingEntity.RuntimeTypeAdapterFactoryClazz = Name;
+            livingEntity.Id = Id;
+            livingEntity.Name = Name;
+            livingEntity.Health = Health;
+            livingEntity.MaxHealth = MaxHealth;
+            livingEntity.Armor = Armor;
+            livingEntity.MagicResist = MagicResist;
+            livingEntity.AttackDamage = AttackDamage;
+            livingEntity.AbilityPower = AbilityPower;
+            livingEntity.MoveSpeed = MoveSpeed;
+            livingEntity.Moving = Moving;
+            livingEntity.PosX = PosX;
+            livingEntity.PosZ = PosZ;
+            livingEntity.PosY = PosY;
+            livingEntity.PosSkinX = PosSkinX;
+            livingEntity.PosSkinZ = PosSkinZ;
+            livingEntity.PosSkinY = PosSkinY;
+            livingEntity.SkinScale = SkinScale;
+            livingEntity.PosXDesired = PosXDesired;
+            livingEntity.PosZDesired = PosZDesired;
+            livingEntity.PosYDesired = PosYDesired;
+            livingEntity.RotationY = RotationY;
+            livingEntity.Team = Team;
+            livingEntity.CooldownQStart = CooldownQStart;
+            livingEntity.CooldownWStart = CooldownWStart;
+            livingEntity.CooldownEStart = CooldownEStart;
+            livingEntity.CooldownRStart = CooldownRStart;
+            livingEntity.CooldownQEnd = CooldownQEnd;
+            livingEntity.CooldownWEnd = CooldownWEnd;
+            livingEntity.CooldownEEnd = CooldownEEnd;
+            livingEntity.CooldownREnd = CooldownREnd;
+            livingEntity.CooldownQMs = CooldownQMs;
+            livingEntity.CooldownWMs = CooldownWMs;
+            livingEntity.CooldownEMs = CooldownEMs;
+            livingEntity.CooldownRMs = CooldownRMs;
+            return livingEntity;
         }
     }
 }

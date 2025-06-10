@@ -66,7 +66,7 @@ namespace Script.Game.Player.Controls
                 Quaternion targetRotation = Quaternion.LookRotation(_agent.desiredVelocity);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 900 * Time.deltaTime);
 
-                Message message = ListenerScheduler.Instance.CreateMessage();
+                ListenerScheduler.Instance.SendLocalPlayerUpdate();
                 // penser côté java à mettre à jour les infos avec les datas x, y, z,
                 // pas que l'action et as t on vraiment besoin de l'action :
                 // je dirais que pour les cast et les attaques
