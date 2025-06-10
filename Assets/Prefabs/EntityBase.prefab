@@ -54,7 +54,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2111198669574771738}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -172,6 +172,7 @@ MonoBehaviour:
   _posSkinY: 0
   _skinScale: 0
   _skinAnimation: 
+  _skinAnimationSpeed: 0
   _posXDesired: 0
   _posZDesired: 0
   _posYDesired: 0
@@ -277,6 +278,7 @@ MonoBehaviour:
   animationName: 
   animationStatus: 
   animationComponent: {fileID: 0}
+  animationSpeed: 0
 --- !u!1 &6317207325646954310
 GameObject:
   m_ObjectHideFlags: 0

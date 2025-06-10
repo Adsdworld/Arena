@@ -10,6 +10,7 @@ namespace Script.Game.Entity.Listeners
         [SerializeField] private string animationName;
         [SerializeField] private string animationStatus;
         [SerializeField] private Animation animationComponent;
+        [SerializeField] private float animationSpeed;
 
         private void Update()
         {
@@ -27,6 +28,7 @@ namespace Script.Game.Entity.Listeners
                 }
 
                 animationName = currentSkinAnimation;
+                animationSpeed = entityComponent.SkinAnimationSpeed;
                 CrossFadeToAnimation(animationName);
             }
         }
@@ -35,6 +37,7 @@ namespace Script.Game.Entity.Listeners
         {
             if (HasAnimation(animName))
             {
+                animationComponent[animName].speed = animationSpeed;
                 animationComponent.CrossFade(animName, 0.2f);
                 animationStatus = $"Playing animation: {animName}";
             }
@@ -54,22 +57,9 @@ namespace Script.Game.Entity.Listeners
             return false;
         }
 
-        public float GetAnimationLength(string animName)
-        {
-            if (animationComponent.IsUnityNull()) return 0f;
-
-            foreach (AnimationState state in animationComponent)
-            {
-                if (state.name == animName)
-                    return state.length;
-            }
-
-            Debug.LogWarning($"Animation '{animName}' not found.");
-            return 0f;
-        }
-
         public void UpdateAnimationEntitySkinController(GameObject gameObject_, EntityComponent entityComponent_)
         {
+            Log.Info($"@@@[SkinAnimations.cs] Updating animation entity skin controller for {gameObject_.name} with entity component {entityComponent_.Name}.");
             animationComponent = gameObject_.transform.GetComponentInChildren<Animation>();
             entityComponent = entityComponent_;
             animationName = "";

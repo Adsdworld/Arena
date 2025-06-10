@@ -13,11 +13,17 @@ namespace Script.Game.Player.Controls
     {
         private InputSystem_Actions _controls;
         
-        [SerializeField] private static NavMeshAgent _agent;
+        [SerializeField] private NavMeshAgent _agent;
         
         public UnityEngine.Camera _mainCamera;
+
+        [SerializeField] private GameObject playerCapsule;
+
+        [SerializeField] private EntityComponent _entityComponent;
         
         public LayerMask layerMask;
+
+        [SerializeField] private bool isArrived;
         
         private void Awake()
         {
@@ -27,15 +33,31 @@ namespace Script.Game.Player.Controls
         
         private void Update()
         {
-            if (!_agent.IsUnityNull())
+            if (!_agent.IsUnityNull()
+                && _agent.enabled 
+                && _agent.isActiveAndEnabled 
+                && _agent.isOnNavMesh)
             {
                 Vector3 dir = _agent.desiredVelocity;
+                dir.y = 0;
                 if (dir != Vector3.zero)
                 {
                     //transform.rotation = Quaternion.LookRotation(dir);
-                    Quaternion targetRotation = Quaternion.LookRotation(_agent.desiredVelocity);
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 900 * Time.deltaTime); // 21.05 anciennemen 720
+                    Quaternion targetRotation = Quaternion.LookRotation(dir);
+                    playerCapsule.transform.rotation = Quaternion.RotateTowards(playerCapsule.transform.rotation, targetRotation, 900 * Time.deltaTime); // 21.05 anciennemen 720
 
+                }
+
+                if (HasReachedDestination(_agent))
+                {
+                    isArrived = true;
+                    _entityComponent.Moving = false;
+                    _agent.enabled = false;
+                }
+                else
+                {
+                    isArrived = false;
+                    _entityComponent .Moving = true;
                 }
             }
         }
@@ -52,6 +74,12 @@ namespace Script.Game.Player.Controls
 
         private void OnRightClic(InputAction.CallbackContext context)
         {
+            if (isArrived)
+            {
+                _agent.enabled = true;
+            }
+            isArrived = false;
+            _entityComponent.Moving = true;
             if (_agent.IsUnityNull())
             {
                 Debug.LogError("NavMeshAgent is not set. Please call UpdateRightClicEntityController with a valid GameObject.");
@@ -63,8 +91,13 @@ namespace Script.Game.Player.Controls
             if (Physics.Raycast(ray, out RaycastHit hit, 100, layerMask))
             {
                 _agent.SetDestination(hit.point);
-                Quaternion targetRotation = Quaternion.LookRotation(_agent.desiredVelocity);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 900 * Time.deltaTime);
+                Vector3 dir = _agent.desiredVelocity;
+                dir.y = 0;
+                if (dir != Vector3.zero)                
+                {
+                    Quaternion targetRotation = Quaternion.LookRotation(dir);
+                    playerCapsule.transform.rotation = Quaternion.RotateTowards(playerCapsule.transform.rotation, targetRotation, 900 * Time.deltaTime);
+                }
 
                 ListenerScheduler.Instance.SendLocalPlayerUpdate();
                 // penser côté java à mettre à jour les infos avec les datas x, y, z,
@@ -75,6 +108,7 @@ namespace Script.Game.Player.Controls
 
         public void UpdateRightClicEntityController(GameObject gameObject)
         {
+            playerCapsule = gameObject;
             _agent = gameObject.GetComponent<NavMeshAgent>();
             if (_agent.IsUnityNull())
             {
@@ -84,9 +118,10 @@ namespace Script.Game.Player.Controls
             _agent.updateRotation = false;
             _agent.acceleration = 999.0f;
             _agent.speed = gameObject.GetComponent<EntityComponent>().MoveSpeed;
+            _entityComponent = gameObject.GetComponent<EntityComponent>();
         }
 
-        public static void SetMoveSpeed(float moveSpeed)
+        public void SetMoveSpeed(float moveSpeed)
         {
             if (_agent.IsUnityNull())
             {
@@ -101,5 +136,21 @@ namespace Script.Game.Player.Controls
             }
             _agent.speed = moveSpeed;
         }
+        
+        bool HasReachedDestination(NavMeshAgent agent)
+        {
+            if (!agent.pathPending)
+            {
+                if (agent.remainingDistance <= agent.stoppingDistance)
+                {
+                    if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
     }
 }

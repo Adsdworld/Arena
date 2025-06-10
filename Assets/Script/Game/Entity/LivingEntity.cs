@@ -51,6 +51,8 @@ namespace Script.Game.Entity
         public float SkinScale { get; set; }
         [JsonProperty("skinAnimation")]
         public string SkinAnimation { get; set; }
+        [JsonProperty("skinAnimationSpeed")]
+        public float SkinAnimationSpeed { get; set; }
         [JsonProperty("posXDesired")]
         public float PosXDesired { get; set; }
         [JsonProperty("posZDesired")]

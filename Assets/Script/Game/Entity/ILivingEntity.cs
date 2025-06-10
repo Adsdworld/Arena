@@ -20,6 +20,7 @@
         float PosSkinY { get; set; }
         float SkinScale { get; set; }
         string SkinAnimation { get; set; }
+        float SkinAnimationSpeed { get; set; }
         float PosXDesired { get; set; }
         float PosZDesired { get; set; }
         float PosYDesired { get; set; }
