@@ -84,5 +84,20 @@ namespace Script.Game.Player.Listeners
                 message.Send();
             }
         }
+        public void SendLocalPlayerUpdate(ActionEnum actionEnum)
+        {
+            TriggerListeners();
+            if (entityId != LocalPlayer.defaultControlledEntityId)
+            {
+                livingEntity = entityComponent.ToLivingEntity();
+            
+                Message message = new Message();
+                message.SetAction(actionEnum);
+                message.SetLivingEntity(livingEntity);
+            
+                message.SetGameNameEnum(LocalPlayer.Instance.GameName);
+                message.Send();
+            }
+        }
     }
 }
