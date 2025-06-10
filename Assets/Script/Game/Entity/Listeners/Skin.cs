@@ -144,14 +144,6 @@ namespace Script.Game.Entity.Listeners
                     _skinState = "Failed to instantiate " + filePath;
                     return;
                 }
-                
-                foreach (var renderer in skinRoot.GetComponentsInChildren<Renderer>())
-                {
-                    foreach (var mat in renderer.sharedMaterials)
-                    {
-                        Debug.Log($"Material: {mat?.name ?? "null"}, Shader: {mat?.shader?.name ?? "null"}");
-                    }
-                }
 
                 CurrentSkin = skinRoot;
                 _skinState = "Loaded " + filePath;
