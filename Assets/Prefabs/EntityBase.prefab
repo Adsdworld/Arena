@@ -167,6 +167,11 @@ MonoBehaviour:
   _posX: 0
   _posZ: 0
   _posY: 0
+  _posSkinX: 0
+  _posSkinZ: 0
+  _posSkinY: 0
+  _skinScale: 0
+  _skinAnimation: 
   _posXDesired: 0
   _posZDesired: 0
   _posYDesired: 0
@@ -216,6 +221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8256897947760410867}
   - component: {fileID: 7464975552873465849}
+  - component: {fileID: 5390839090322163164}
   m_Layer: 0
   m_Name: Listeners
   m_TagString: Untagged
@@ -252,6 +258,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _skin: 
   _skinState: 
+  _team: 0
+  _entityComponent: {fileID: 0}
+  SkinContainer: {fileID: 0}
+--- !u!114 &5390839090322163164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3674162749248333857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f4b91d6d6e4b548dd07840fe21eabe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityComponent: {fileID: 0}
+  animationName: 
+  animationStatus: 
+  animationComponent: {fileID: 0}
 --- !u!1 &6317207325646954310
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,6 +286,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5651391604163173739}
+  - component: {fileID: 4337930882315657602}
   m_Layer: 0
   m_Name: SkinContainer
   m_TagString: Untagged
@@ -283,3 +309,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3643474453971908764}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!111 &4337930882315657602
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6317207325646954310}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0

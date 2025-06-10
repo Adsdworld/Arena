@@ -1,11 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
 using UnityEngine;
 using GLTFast;
-using Script.Game.Entity;
-using Script.Game.Player;
-using Script.Game.Player.Listeners;
 using Script.Utils;
 using Unity.VisualScripting;
 
@@ -147,9 +143,16 @@ namespace Script.Game.Entity.Listeners
 
                 CurrentSkin = skinRoot;
                 _skinState = "Loaded " + filePath;
+                
+                UpDateEntitySkinControllers(skinRoot);
 
                 //Log.Info($"Skin {name_} loaded and instantiated.");
             }
+        }
+
+        private void UpDateEntitySkinControllers(GameObject aGameObject)
+        {
+            gameObject.GetComponent<SkinAnimations>().UpdateAnimationEntitySkinController(aGameObject, _entityComponent);
         }
     }
 }

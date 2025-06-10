@@ -28,6 +28,7 @@ namespace Script.Game.Entity
         [SerializeField] [JsonProperty("posSkinZ")] private float _posSkinZ;
         [SerializeField] [JsonProperty("posSkinY")] private float _posSkinY;
         [SerializeField] [JsonProperty("skinScale")] private float _skinScale;
+        [SerializeField] [JsonProperty("skinAnimation")] private string _skinAnimation;
         [SerializeField] [JsonProperty("posXDesired")] private float _posXDesired;
         [SerializeField] [JsonProperty("posZDesired")] private float _posZDesired;
         [SerializeField] [JsonProperty("posYDesired")] private float _posYDesired;
@@ -88,6 +89,7 @@ namespace Script.Game.Entity
         public float PosSkinZ { get; set; }
         public float PosSkinY { get; set; }
         public float SkinScale { get => _skinScale; set => _skinScale = value; }
+        public string SkinAnimation { get => _skinAnimation; set => _skinAnimation = value; }
         public float PosXDesired { get => _posXDesired; set => _posXDesired = value; }
         public float PosZDesired { get => _posZDesired; set => _posZDesired = value; }
         public float PosYDesired { get => _posYDesired; set => _posYDesired = value; }
@@ -131,6 +133,7 @@ namespace Script.Game.Entity
             PosSkinZ = data.PosSkinZ;
             PosSkinY = data.PosSkinY;
             SkinScale = data.SkinScale;
+            SkinAnimation = data.SkinAnimation;
             PosXDesired = data.PosXDesired;
             PosZDesired = data.PosZDesired;
             RotationY = data.RotationY;
@@ -170,6 +173,7 @@ namespace Script.Game.Entity
                 PosSkinZ = livingEntity.PosSkinZ;
                 PosSkinY = livingEntity.PosSkinY;
                 SkinScale = livingEntity.SkinScale;
+                SkinAnimation = livingEntity.SkinAnimation;
                 //PosXDesired = livingEntity.PosXDesired;
                 //PosZDesired = livingEntity.PosZDesired;
                 //PosYDesired = livingEntity.PosYDesired;
@@ -208,6 +212,7 @@ namespace Script.Game.Entity
                 PosSkinZ = livingEntity.PosSkinZ;
                 PosSkinY = livingEntity.PosSkinY;
                 SkinScale = livingEntity.SkinScale;
+                SkinAnimation = livingEntity.SkinAnimation;
                 PosXDesired = livingEntity.PosXDesired;
                 PosZDesired = livingEntity.PosZDesired;
                 PosYDesired = livingEntity.PosYDesired;
@@ -251,6 +256,7 @@ namespace Script.Game.Entity
             livingEntity.PosSkinZ = PosSkinZ;
             livingEntity.PosSkinY = PosSkinY;
             livingEntity.SkinScale = SkinScale;
+            livingEntity.SkinAnimation = SkinAnimation;
             livingEntity.PosXDesired = PosXDesired;
             livingEntity.PosZDesired = PosZDesired;
             livingEntity.PosYDesired = PosYDesired;
