@@ -23,7 +23,7 @@ namespace Script.Game.Entity.Listeners
             {
                 if (animationComponent.IsUnityNull())
                 {
-                    Debug.LogWarning("[SkinAnimations.cs] Animation component is null, cannot update animation.");
+                    Debug.LogWarning("Animation component is null, cannot update animation.");
                     return;
                 }
 
@@ -44,7 +44,7 @@ namespace Script.Game.Entity.Listeners
             }
             else
             {
-                Debug.LogWarning($"[SkinAnimations.cs] Animation '{animName}' not found in component.");
+                Debug.LogWarning($"Animation '{animName}' not found in component.");
             }
         }
 
@@ -61,7 +61,7 @@ namespace Script.Game.Entity.Listeners
 
         public void UpdateAnimationEntitySkinController(GameObject gameObject_, EntityComponent entityComponent_)
         {
-            Log.Info($"@@@[SkinAnimations.cs] Updating animation entity skin controller for {gameObject_.name} with entity component {entityComponent_.Name}.");
+            Log.Info($"Updating animation entity skin controller for {gameObject_.name} with entity component {entityComponent_.Name}.");
             animationComponent = gameObject_.transform.GetComponentInChildren<Animation>();
             entityComponent = entityComponent_;
             animationName = "";
