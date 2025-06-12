@@ -66,8 +66,11 @@ namespace Script.Game.Player
                 ActionEnum.Join => "Join",
                 ActionEnum.CloseGame => "Close Game",
                 ActionEnum.WhatIsMyEntity => "What Is My Entity",
-                ActionEnum.CooldownStart => "Cooldown Start",
                 ActionEnum.PlayerStateUpdate => "Player State Update",
+                ActionEnum.CastQ => "Cast Q",
+                ActionEnum.CastW => "Cast W",
+                ActionEnum.CastE => "Cast E",
+                ActionEnum.CastR => "Cast R",
                 _ => null
             };
         }
