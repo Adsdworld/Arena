@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Script.Game.Core;
+using Script.Game.Entity.Listeners;
 using UnityEngine;
 using Script.Network.response;
 using Script.Utils;
@@ -67,7 +69,13 @@ namespace Script.Game.Entity
                     
                     newGo.transform.position = new Vector3(serverEntity.PosX, serverEntity.PosY, serverEntity.PosZ);
                     newGo.transform.rotation = Quaternion.Euler(0, serverEntity.RotationY, 0);
-                    newGo.GetComponent<EntityComponent>().Initialize(serverEntity);
+
+                    var serverEntityComponent = newGo.GetComponent<EntityComponent>();
+                    serverEntityComponent.Initialize(serverEntity);
+                    // Déscativer le listener move pour éviter les conflits avec l'entité controllé par le joueur local
+                    if (serverEntityComponent.Id == UuidManager.GetUuid()) newGo.GetComponent<Move>().enabled = false;
+                    
+                    
                     newGo.name = $"Entity_{serverEntity.Id}";
                     newGo.transform.localScale = Vector3.one * serverEntity.Transform_.Scale;
                     
