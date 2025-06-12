@@ -18,10 +18,10 @@ namespace Script.Network.Transport
     {
         public static UnityWebSocket Instance { get; private set; }
 
-        [SerializeField] private static WebSocket _websocket;
-        public bool production;
+        [SerializeField] public static WebSocket _websocket;
         private static bool _shouldReconnect = true;
         private static bool _logEnabled = true;
+        public static string _serverAddress = "arenafr.servegame.com";
 
         
         private void Awake()
@@ -37,13 +37,13 @@ namespace Script.Network.Transport
             DontDestroyOnLoad(gameObject);
         }
 
-        private void Start() // Do not add code here, add code OnOpen(), OnMessage(), OnError(), OnClose().
+        public void ConnectWebsocket() // Do not add code here, add code OnOpen(), OnMessage(), OnError(), OnClose().
         {
-            if (_logEnabled) Log.Info("Start Initialisation du client WebSocket...");
+            if (_logEnabled) Log.Info("ConnectWebsocket Initialisation du client WebSocket...");
             
             MessageService.MessageSender = new UnityWebSocketMessageSender();
 
-            _websocket = production? new WebSocket("ws://arenafr.servegame.com:54099") : new WebSocket("ws://localhost:54099");
+            _websocket = new WebSocket("ws://"+_serverAddress+":54099");
 
             _websocket.OnOpen += OnOpen;
             _websocket.OnMessage += OnMessage;
@@ -125,7 +125,7 @@ namespace Script.Network.Transport
 
             if (_shouldReconnect)
             {
-                Start();
+                ConnectWebsocket();
             }
         }
 
@@ -184,6 +184,23 @@ namespace Script.Network.Transport
             Log.Info("OnApplicationQuit >> CloseWebSocket()");
             _shouldReconnect = false;
             _websocket.Close(CloseStatusCode.Normal, "OnApplicationQuit");
+        }
+        
+        public WebSocket GetWebSocket()
+        {
+            return _websocket;
+        }
+
+        public void SetServerAddress(string address)
+        {
+            if (string.IsNullOrEmpty(address))
+            {
+                Log.Failure("Adresse du serveur ne peut pas être vide.");
+                return;
+            }
+
+            _serverAddress = address;
+            Log.Info("Adresse du serveur mise à jour : " + _serverAddress);
         }
     }
 }

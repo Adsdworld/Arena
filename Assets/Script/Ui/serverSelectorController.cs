@@ -1,18 +1,34 @@
+using System.IO;
 using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Script.Game;
 using Script.Game.Player;
 using Script.Network.Message;
+using Script.Network.Transport;
 using Script.Utils;
+using UnityEngine.UI;
+using Button = UnityEngine.UIElements.Button;
 
 namespace Script.Ui
 {
     public class serverSelectorController : MonoBehaviour
     {
+        private static string AddressFilePath;
+        
+        private void Awake()
+        {
+            AddressFilePath = Path.Combine(Application.persistentDataPath, "server_address.txt");
+        }
+
+        
         private UIDocument uiDocument;
         private VisualElement _root;
         private VisualElement _footer;
+        private VisualElement _header;
+        
+        private Button _connectBtn;
+        private TextField _serverAddressText;
 
         private VisualElement _server1;
         private Button _openBtn1;
@@ -45,12 +61,35 @@ namespace Script.Ui
             uiDocument = GetComponent<UIDocument>();
             _root = uiDocument.rootVisualElement;
             _footer = _root.Q<VisualElement>("Footer");
+            _header = _root.Q<VisualElement>("Header");
 
             if (_footer == null)
             {
                 Debug.LogError("Footer introuvable dans l'UI");
                 return;
+            } 
+            if (_header == null) 
+            {
+                Debug.LogError("Header introuvable dans l'UI");
+                return;
             }
+            
+            _connectBtn = _header.Q<Button>("Connect");
+            _serverAddressText = _header.Q<TextField>("ServerIp");
+            _serverAddressText.value = "Loading...";
+            
+            if (_connectBtn != null)
+            {
+                _connectBtn.RegisterCallback<ClickEvent>(evt => OnConnectClicked());
+            }
+            else
+            {
+                Debug.LogError("Connect button not found in the UI");
+            }
+            LoadServerAddress();
+            OnConnectClicked();
+            UnityWebSocket.Instance.ConnectWebsocket();
+
          
 
             // Game1
@@ -122,6 +161,8 @@ namespace Script.Ui
 
         private void OnDisable()
         {
+            _connectBtn.UnregisterCallback<ClickEvent>(e => OnConnectClicked());
+            
             _openBtn1.UnregisterCallback<ClickEvent>(evt => OnOpenClicked(GameNameEnum.Game1));
             _joinBtn1.UnregisterCallback<ClickEvent>(e => OnJoinClicked(GameNameEnum.Game1));
             _closeBtn1.UnregisterCallback<ClickEvent>(e => OnCloseClicked(GameNameEnum.Game1));
@@ -168,6 +209,60 @@ namespace Script.Ui
             message.SetAction(ActionEnum.CloseGame);
             message.SetGameNameEnum(game);
             message.Send();
+        }
+
+        private void OnConnectClicked()
+        {
+            SaveServerAddress();
+            string address = LoadServerAddress();
+            Debug.Log($"Connecting to server at address: {address}");
+            var a = UnityWebSocket.Instance.GetWebSocket();
+            if (a != null && a.IsAlive)
+            {
+                a.Close();
+            }
+            UnityWebSocket.Instance.SetServerAddress(address);
+        }
+        
+        public void SaveServerAddress()
+        {
+            if (_serverAddressText == null) return;
+
+            string address = _serverAddressText.text;
+
+            try
+            {
+                File.WriteAllText(AddressFilePath, address);
+                Debug.Log($"Adresse serveur enregistrée : {address}");
+            }
+            catch (IOException e)
+            {
+                Debug.LogError("Erreur en sauvegardant l'adresse : " + e.Message);
+            }
+        }
+
+        public string LoadServerAddress()
+        {
+            if (File.Exists(AddressFilePath))
+            {
+                try
+                {
+                    string address = File.ReadAllText(AddressFilePath);
+                    _serverAddressText.value = address;
+                    Debug.Log($"Adresse serveur chargée : {address}");
+                    return address;
+                }
+                catch (IOException e)
+                {
+                    Debug.LogError("Erreur en lisant l'adresse : " + e.Message);
+                    return "échec de chargement";
+                }
+            }
+            else
+            {
+                File.WriteAllText(AddressFilePath, "192.168.137.1");
+                return LoadServerAddress();
+            }
         }
     }
 }
