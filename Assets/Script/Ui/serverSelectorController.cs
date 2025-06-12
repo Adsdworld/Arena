@@ -19,6 +19,8 @@ namespace Script.Ui
         private void Awake()
         {
             AddressFilePath = Path.Combine(Application.persistentDataPath, "server_address.txt");
+            UnityWebSocket.Instance.SetServerAddress(LoadServerAddress());
+            UnityWebSocket.Instance.ConnectWebsocket();
         }
 
         
@@ -87,9 +89,6 @@ namespace Script.Ui
                 Debug.LogError("Connect button not found in the UI");
             }
             LoadServerAddress();
-            OnConnectClicked();
-            UnityWebSocket.Instance.ConnectWebsocket();
-
          
 
             // Game1
@@ -222,6 +221,7 @@ namespace Script.Ui
                 a.Close();
             }
             UnityWebSocket.Instance.SetServerAddress(address);
+            UnityWebSocket.Instance.ConnectWebsocket();
         }
         
         public void SaveServerAddress()
@@ -248,7 +248,10 @@ namespace Script.Ui
                 try
                 {
                     string address = File.ReadAllText(AddressFilePath);
-                    _serverAddressText.value = address;
+                    if (_serverAddressText != null)
+                    {
+                        _serverAddressText.value = address;
+                    }
                     Debug.Log($"Adresse serveur chargée : {address}");
                     return address;
                 }

@@ -30,8 +30,8 @@ namespace Script.Ui
         {
             if (menuUI != null)
             {
-                menuUI.SetActive(false); // On le cache au début
-                isVisible = false;
+                menuUI.SetActive(true);
+                isVisible = true;
             }
         }
 
