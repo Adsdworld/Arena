@@ -39,6 +39,7 @@ namespace Script.Game.Entity.Listeners
             {
                 _entityCapsule = parent.gameObject;
                 _entityComponent = _entityCapsule.GetComponent<EntityComponent>();
+                _agent = _entityCapsule.GetComponent<NavMeshAgent>();
             }
             else
             {

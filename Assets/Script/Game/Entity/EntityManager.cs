@@ -70,10 +70,6 @@ namespace Script.Game.Entity
                     newGo.transform.position = new Vector3(serverEntity.PosX, serverEntity.PosY, serverEntity.PosZ);
                     newGo.transform.rotation = Quaternion.Euler(0, serverEntity.RotationY, 0);
                     newGo.GetComponent<EntityComponent>().Initialize(serverEntity);
-                    /*if (serverEntity.Id == UuidManager.GetUuid())
-                    {
-                        newGo.GetComponentInChildren<Move>().enabled = false;
-                    }*/
                     newGo.name = $"Entity_{serverEntity.Id}";
                     newGo.transform.localScale = Vector3.one * serverEntity.Transform_.Scale;
                     
