@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Threading.Tasks;
 using UnityEngine;
 using GLTFast;
@@ -57,12 +57,12 @@ namespace Script.Game.Entity.Listeners
             if (!_entityComponent.HasArrived)
             {
                 if (_agent.IsUnityNull()) return;
-                if (!_agent.enabled) _agent.enabled = true;
-                if (!_agent.IsUnityNull()
-                    && _agent.enabled
-                    && _agent.isActiveAndEnabled
-                    && _agent.isOnNavMesh
-                    && _entityComponent.NavMeshAgent_.Enabled)
+                if (_entityComponent.NavMeshAgent_.Enabled)
+                {
+                    if (!_agent.enabled) _agent.enabled = true;
+                }
+                if (_agent.isActiveAndEnabled
+                    && _agent.isOnNavMesh)
                 {
                     _state = "Agent is moving";
                     _desiredX = _entityComponent.PosXDesired;

@@ -53,7 +53,7 @@ namespace Script.Game.Entity
         [JsonIgnore]
         public EntityCollider Collider_ { get; set; }
         [JsonIgnore]
-        public EntityRigidbody Rigidbody_ { get; set; }
+        public EntityRigidbody RigidBody_ { get; set; }
         [JsonIgnore]
         public EntityNavMeshAgent NavMeshAgent_ { get; set; }
         [JsonIgnore]
@@ -153,6 +153,23 @@ namespace Script.Game.Entity
             CooldownWEnd = data.CooldownWEnd;
             CooldownEEnd = data.CooldownEEnd;
             CooldownREnd = data.CooldownREnd;
+            
+            RigidBody_ = new EntityRigidbody
+            {
+                IsKinematic = data.RigidBody_.IsKinematic
+            };
+            Collider_ = new EntityCollider
+            {
+                Enabled = data.Collider_.Enabled
+            };
+            NavMeshAgent_ = new EntityNavMeshAgent
+            {
+                Enabled = data.NavMeshAgent_.Enabled
+            };
+            Transform_ = new EntityTransform
+            {
+                Scale = data.Transform_.Scale
+            };
         }
 
         public void UpdateFromData(LivingEntity livingEntity)
@@ -200,6 +217,11 @@ namespace Script.Game.Entity
                 CooldownEMs = livingEntity.CooldownEMs;
                 CooldownRMs = livingEntity.CooldownRMs;
                 
+                RigidBody_ = livingEntity.RigidBody_;
+                Collider_ = livingEntity.Collider_;
+                NavMeshAgent_ = livingEntity.NavMeshAgent_;
+                Transform_ = livingEntity.Transform_;
+                
             }
             else
             {
@@ -240,6 +262,11 @@ namespace Script.Game.Entity
                 CooldownWMs = livingEntity.CooldownWMs;
                 CooldownEMs = livingEntity.CooldownEMs;
                 CooldownRMs = livingEntity.CooldownRMs;
+                
+                RigidBody_ = livingEntity.RigidBody_;
+                Collider_ = livingEntity.Collider_;
+                NavMeshAgent_ = livingEntity.NavMeshAgent_;
+                Transform_ = livingEntity.Transform_;
             }
         }
 
@@ -286,6 +313,11 @@ namespace Script.Game.Entity
             livingEntity.CooldownWMs = CooldownWMs;
             livingEntity.CooldownEMs = CooldownEMs;
             livingEntity.CooldownRMs = CooldownRMs;
+            
+            livingEntity.RigidBody_ = RigidBody_;
+            livingEntity.Collider_ = Collider_;
+            livingEntity.NavMeshAgent_ = NavMeshAgent_;
+            livingEntity.Transform_ = Transform_;
             return livingEntity;
         }
     }

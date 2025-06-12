@@ -39,5 +39,10 @@
         long CooldownWMs { get; set; }
         long CooldownEMs { get; set; }
         long CooldownRMs { get; set; }
+        
+        EntityRigidbody RigidBody_ { get; set; }
+        EntityNavMeshAgent NavMeshAgent_ { get; set; }
+        EntityCollider Collider_ { get; set; }
+        EntityTransform Transform_ { get; set; }
     }
 }

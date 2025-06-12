@@ -73,7 +73,7 @@ namespace Script.Game.Entity
                     newGo.name = $"Entity_{serverEntity.Id}";
                     newGo.transform.localScale = Vector3.one * serverEntity.Transform_.Scale;
                     
-                    newGo.GetComponent<Rigidbody>().isKinematic = serverEntity.Rigidbody_.IsKinematic;
+                    newGo.GetComponent<Rigidbody>().isKinematic = serverEntity.RigidBody_.IsKinematic;
                     newGo.GetComponent<Collider>().enabled = serverEntity.Collider_.Enabled;
                     newGo.GetComponent<NavMeshAgent>().enabled = serverEntity.NavMeshAgent_.Enabled;
                     

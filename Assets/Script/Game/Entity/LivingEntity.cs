@@ -102,7 +102,7 @@ namespace Script.Game.Entity
         [JsonProperty("collider")]
         public EntityCollider Collider_ { get; set; }
         [JsonProperty("rigidbody")]
-        public EntityRigidbody Rigidbody_ { get; set; }
+        public EntityRigidbody RigidBody_ { get; set; }
         [JsonProperty("navMeshAgent")]
         public EntityNavMeshAgent NavMeshAgent_ { get; set; }
         [JsonProperty("transform")]
