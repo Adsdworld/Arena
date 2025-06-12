@@ -54,7 +54,7 @@ namespace Script.Game.Entity.Listeners
             if (_entityComponent.IsUnityNull()) return;
             if ("Entity_" + _entityComponent.Id == LocalPlayer.Instance.GetControlledEntityId()) return;
             
-            if (_entityComponent.Moving)
+            if (_entityComponent.HasArrived)
             {
                 if (!_agent.IsUnityNull()
                     && _agent.enabled

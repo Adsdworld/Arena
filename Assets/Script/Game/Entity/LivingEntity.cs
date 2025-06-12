@@ -34,6 +34,8 @@ namespace Script.Game.Entity
 
         [JsonProperty("moving")]
         public bool Moving { get; set; }
+        [JsonProperty("hasArrived")]
+        public bool HasArrived { get; set; }
 
         [JsonProperty("posX")]
         public float PosX { get; set; }

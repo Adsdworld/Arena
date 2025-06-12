@@ -21,6 +21,7 @@ namespace Script.Game.Entity
         
         [SerializeField] [JsonProperty("moveSpeed")] private float _moveSpeed;
         [SerializeField] [JsonProperty("moving")] private bool _moving;
+        [SerializeField] [JsonProperty("hasArrived")] private bool _hasArrived;
         [SerializeField] [JsonProperty("posX")] private float _posX;
         [SerializeField] [JsonProperty("posZ")] private float _posZ;
         [SerializeField] [JsonProperty("posY")] private float _posY;
@@ -83,6 +84,7 @@ namespace Script.Game.Entity
         public float MoveSpeed { get => _moveSpeed; set =>_moveSpeed = value; }
         
         public bool Moving { get => _moving; set => _moving = value; }
+        public bool HasArrived { get => _hasArrived; set => _hasArrived = value; }
         public float PosX { get => _posX; set => _posX = value; }
         public float PosZ { get => _posZ; set => _posZ = value; }
         public float PosY { get => _posY; set => _posY = value; }
@@ -128,6 +130,7 @@ namespace Script.Game.Entity
             AbilityPower = data.AbilityPower;
             MoveSpeed = data.MoveSpeed;
             Moving = data.Moving;
+            HasArrived = data.HasArrived;
             PosX = data.PosX;
             PosZ = data.PosZ;
             PosY = data.PosY;
@@ -169,6 +172,7 @@ namespace Script.Game.Entity
                 AbilityPower = livingEntity.AbilityPower;
                 MoveSpeed = livingEntity.MoveSpeed;
                 //Moving = livingEntity.Moving;
+                //HasArrived = livingEntity.hasArrived;
                 //PosX = livingEntity.PosX;
                 //PosZ = livingEntity.PosZ;
                 //PosY = livingEntity.PosY;
@@ -209,6 +213,7 @@ namespace Script.Game.Entity
                 AbilityPower = livingEntity.AbilityPower;
                 MoveSpeed = livingEntity.MoveSpeed;
                 Moving = livingEntity.Moving;
+                HasArrived = livingEntity.HasArrived;
                 PosX = livingEntity.PosX;
                 PosZ = livingEntity.PosZ;
                 PosY = livingEntity.PosY;
@@ -254,6 +259,7 @@ namespace Script.Game.Entity
             livingEntity.AbilityPower = AbilityPower;
             livingEntity.MoveSpeed = MoveSpeed;
             livingEntity.Moving = Moving;
+            livingEntity.HasArrived = HasArrived;
             livingEntity.PosX = PosX;
             livingEntity.PosZ = PosZ;
             livingEntity.PosY = PosY;

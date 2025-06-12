@@ -12,6 +12,7 @@
         int AbilityPower { get; set; }
         float MoveSpeed { get; set; }
         bool Moving { get; set; }
+        bool HasArrived { get; set; }
         float PosX { get; set; }
         float PosZ { get; set; }
         float PosY { get; set; }
