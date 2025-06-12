@@ -363,6 +363,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   isArrived: 0
+  isNearDestination: 0
 --- !u!1 &164155571
 GameObject:
   m_ObjectHideFlags: 0
@@ -3336,7 +3337,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 972bfdf45922f03489f0f8430b027d13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  production: 0
 --- !u!1 &2112472569
 GameObject:
   m_ObjectHideFlags: 0

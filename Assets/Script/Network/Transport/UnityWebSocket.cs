@@ -161,7 +161,7 @@ namespace Script.Network.Transport
             try
             {
                 _websocket.Send(json);
-                Log.Info("Message envoyé au serveur : " + json);
+                //Log.Info("Message envoyé au serveur : " + json);
             }
             catch (Exception e)
             {

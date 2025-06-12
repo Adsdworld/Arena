@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 8256897947760410867}
   - component: {fileID: 7464975552873465849}
   - component: {fileID: 5390839090322163164}
+  - component: {fileID: 7771515382729088938}
   m_Layer: 0
   m_Name: Listeners
   m_TagString: Untagged
@@ -279,6 +280,28 @@ MonoBehaviour:
   animationStatus: 
   animationComponent: {fileID: 0}
   animationSpeed: 0
+--- !u!114 &7771515382729088938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3674162749248333857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e128ae80a0c7426a93dc12c4467f4234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _x: 0
+  _y: 0
+  _z: 0
+  _desiredX: 0
+  _desiredY: 0
+  _desiredZ: 0
+  _agent: {fileID: 0}
+  _entityComponent: {fileID: 0}
+  _entityCapsule: {fileID: 0}
+  _state: 
 --- !u!1 &6317207325646954310
 GameObject:
   m_ObjectHideFlags: 0

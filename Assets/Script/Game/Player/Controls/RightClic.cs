@@ -102,6 +102,10 @@ namespace Script.Game.Player.Controls
             if (Physics.Raycast(ray, out RaycastHit hit, 100, layerMask))
             {
                 _agent.SetDestination(hit.point);
+                _entityComponent.PosXDesired = hit.point.x;
+                _entityComponent.PosYDesired = hit.point.y;
+                _entityComponent.PosZDesired = hit.point.z;
+                ListenerScheduler.Instance.SendLocalPlayerUpdate();
                 Vector3 dir = _agent.desiredVelocity;
                 dir.y = 0;
                 if (dir != Vector3.zero)                
