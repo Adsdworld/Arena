@@ -61,7 +61,8 @@ namespace Script.Game.Entity.Listeners
                 if (!_agent.IsUnityNull()
                     && _agent.enabled
                     && _agent.isActiveAndEnabled
-                    && _agent.isOnNavMesh)
+                    && _agent.isOnNavMesh
+                    && _entityComponent.NavMeshAgent_.Enabled)
                 {
                     _state = "Agent is moving";
                     _desiredX = _entityComponent.PosXDesired;
