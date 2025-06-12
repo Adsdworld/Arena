@@ -40,6 +40,8 @@ namespace Script.Game.Entity.Listeners
                 _entityCapsule = parent.gameObject;
                 _entityComponent = _entityCapsule.GetComponent<EntityComponent>();
                 _agent = _entityCapsule.GetComponent<NavMeshAgent>();
+                _agent.updateRotation = false;
+                _agent.acceleration = 999.0f;
             }
             else
             {
@@ -63,6 +65,7 @@ namespace Script.Game.Entity.Listeners
                     _desiredX = _entityComponent.PosXDesired;
                     _desiredY = _entityComponent.PosYDesired;
                     _desiredZ = _entityComponent.PosZDesired;
+                    _agent.speed = gameObject.GetComponent<EntityComponent>().MoveSpeed;
                     var posDesired = new Vector3(_entityComponent.PosXDesired, _entityComponent.PosYDesired,
                         _entityComponent.PosZDesired);
                     if ((posDesired - _agent.destination).sqrMagnitude > 0.01f)

@@ -35,6 +35,7 @@ namespace Script.Game.Entity.Listeners
 
         private void CrossFadeToAnimation(string animName)
         {
+            if (animName == "None") return;
             if (HasAnimation(animName))
             {
                 animationComponent[animName].speed = animationSpeed;
@@ -49,6 +50,7 @@ namespace Script.Game.Entity.Listeners
 
         private bool HasAnimation(string animName)
         {
+            if (animName == "None") return false;
             foreach (AnimationState state in animationComponent)
             {
                 if (state.name == animName)
