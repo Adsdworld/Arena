@@ -37,6 +37,7 @@ namespace Script.Game.Entity.Listeners
             if (!parent.IsUnityNull())
             {
                 _entityCapsule = parent.gameObject;
+                _entityComponent = _entityCapsule.GetComponent<EntityComponent>();
             }
             else
             {
