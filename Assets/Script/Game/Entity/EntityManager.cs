@@ -69,13 +69,11 @@ namespace Script.Game.Entity
                     
                     newGo.transform.position = new Vector3(serverEntity.PosX, serverEntity.PosY, serverEntity.PosZ);
                     newGo.transform.rotation = Quaternion.Euler(0, serverEntity.RotationY, 0);
-
-                    var serverEntityComponent = newGo.GetComponent<EntityComponent>();
-                    serverEntityComponent.Initialize(serverEntity);
-                    // Déscativer le listener move pour éviter les conflits avec l'entité controllé par le joueur local
-                    if (serverEntityComponent.Id == UuidManager.GetUuid()) newGo.GetComponent<Move>().enabled = false;
-                    
-                    
+                    newGo.GetComponent<EntityComponent>().Initialize(serverEntity);
+                    /*if (serverEntity.Id == UuidManager.GetUuid())
+                    {
+                        newGo.GetComponentInChildren<Move>().enabled = false;
+                    }*/
                     newGo.name = $"Entity_{serverEntity.Id}";
                     newGo.transform.localScale = Vector3.one * serverEntity.Transform_.Scale;
                     

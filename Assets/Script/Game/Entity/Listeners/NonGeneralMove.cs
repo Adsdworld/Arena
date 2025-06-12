@@ -2,13 +2,14 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using GLTFast;
+using Script.Game.Player;
 using Script.Utils;
 using Unity.VisualScripting;
 using UnityEngine.AI;
 
 namespace Script.Game.Entity.Listeners
 {
-    public class Move : MonoBehaviour
+    public class NonGeneralMove : MonoBehaviour
     {
         [SerializeField] private float _x;
         [SerializeField] private float _y;
@@ -48,6 +49,8 @@ namespace Script.Game.Entity.Listeners
         private void Update()
         {
             if (_entityComponent.IsUnityNull()) return;
+            if ("Entity_" + _entityComponent.Id == LocalPlayer.Instance.GetControlledEntityId()) return;
+            
             if (_entityComponent.Moving)
             {
                 if (!_agent.IsUnityNull()
