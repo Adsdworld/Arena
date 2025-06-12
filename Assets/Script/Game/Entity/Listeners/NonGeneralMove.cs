@@ -56,6 +56,8 @@ namespace Script.Game.Entity.Listeners
             
             if (!_entityComponent.HasArrived)
             {
+                if (_agent.IsUnityNull()) return;
+                if (!_agent.enabled) _agent.enabled = true;
                 if (!_agent.IsUnityNull()
                     && _agent.enabled
                     && _agent.isActiveAndEnabled
@@ -87,11 +89,13 @@ namespace Script.Game.Entity.Listeners
                 var pos = new Vector3(_entityComponent.PosX, _entityComponent.PosY, _entityComponent.PosZ);
                 if ((_entityCapsule.transform.position - pos).sqrMagnitude > 0.01f)
                 {
+                    if (_agent.enabled) _agent.enabled = false;
                     _state = "Teleporting entity to position";
                     _x = _entityComponent.PosX;
                     _y = _entityComponent.PosY;
                     _z = _entityComponent.PosZ;
                     _entityCapsule.transform.position = pos;
+                    _entityCapsule.transform.rotation = Quaternion.Euler(0f, _entityComponent.RotationY, 0f);
                 }
             }
         }
