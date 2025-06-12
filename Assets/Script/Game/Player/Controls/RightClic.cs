@@ -24,6 +24,7 @@ namespace Script.Game.Player.Controls
         public LayerMask layerMask;
 
         [SerializeField] private bool isArrived;
+        [SerializeField] private bool isNearDestination;
         
         private void Awake()
         {
@@ -51,13 +52,23 @@ namespace Script.Game.Player.Controls
                 if (HasReachedDestination(_agent))
                 {
                     isArrived = true;
+                    isNearDestination = true;
                     _entityComponent.Moving = false;
                     _agent.enabled = false;
                 }
+                else if (IsNearDestination(_agent, 10.0f))
+                {
+                    // On est proche, on peut par exemple ralentir ou préparer l’arrêt
+                    // Ou basculer Moving à false plus tôt si tu veux
+                    _entityComponent.Moving = false; 
+                    isNearDestination = true;
+                    isArrived = false; // On est pas encore arrivé mais on arrête le mouvement "plein gaz"
+                }
                 else
                 {
+                    isNearDestination = false;
                     isArrived = false;
-                    _entityComponent .Moving = true;
+                    _entityComponent.Moving = true;
                 }
             }
         }
@@ -151,6 +162,20 @@ namespace Script.Game.Player.Controls
             }
             return false;
         }
+        
+        bool IsNearDestination(NavMeshAgent agent, float nearDistanceThreshold)
+        {
+            if (!agent.pathPending)
+            {
+                // Seuil plus large que stoppingDistance pour détecter "proche"
+                if (agent.remainingDistance <= nearDistanceThreshold)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
 
     }
 }
