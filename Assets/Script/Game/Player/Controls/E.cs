@@ -38,7 +38,7 @@ namespace Script.Game.Player.Controls
                 {
                     entityComponent.CooldownEEnd = now + entityComponent.CooldownEMs;
                     entityComponent.CooldownEStart = now;
-                    ListenerScheduler.Instance.SendLocalPlayerUpdate(ActionEnum.CooldownStart);
+                    ListenerScheduler.Instance.SendLocalPlayerUpdate(ActionEnum.CastE);
                 }
             }
         }

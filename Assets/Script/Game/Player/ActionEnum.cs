@@ -28,9 +28,24 @@ namespace Script.Game.Player
         WhatIsMyEntity,
         
         /// <summary>
-        ///
+        /// 
         /// </summary>
-        CooldownStart,
+        CastQ,
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        CastW,
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        CastE,
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        CastR,
         
         /// <summary>
         ///
