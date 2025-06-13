@@ -75,7 +75,7 @@ namespace Script.Game.Entity.Listeners
                 string name_ = _entityComponent.Name;
                 var team = _entityComponent.Team;
                     
-                if (name_ == "Tower" || name_ == "Nexus" || name_ == "Inhibitor")
+                if (name_.Contains("Tower") || name_.Contains("Nexus") || name_.Contains("Inhibitor"))
                     if (team == 1)
                         name_ = "Blue_" + name_;
                     else if (team == 2)
