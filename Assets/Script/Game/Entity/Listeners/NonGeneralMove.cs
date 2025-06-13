@@ -87,16 +87,27 @@ namespace Script.Game.Entity.Listeners
             }
             else
             {
-                var pos = new Vector3(_entityComponent.PosX, _entityComponent.PosY, _entityComponent.PosZ);
-                if ((_entityCapsule.transform.position - pos).sqrMagnitude > 0.01f)
+                if (_agent.enabled)
                 {
-                    if (_agent.enabled) _agent.enabled = false;
-                    _state = "Teleporting entity to position";
+                    _agent.enabled = false;
+                    _state = "Agent disabled. Entity has arrived";
+                }
+                
+                var pos = new Vector3(_entityComponent.PosX, _entityComponent.PosY, _entityComponent.PosZ);
+                if (_entityCapsule.transform.position != pos)
+                {
+                    _entityCapsule.transform.position = pos;
                     _x = _entityComponent.PosX;
                     _y = _entityComponent.PosY;
                     _z = _entityComponent.PosZ;
-                    _entityCapsule.transform.position = pos;
-                    _entityCapsule.transform.rotation = Quaternion.Euler(0f, _entityComponent.RotationY, 0f);
+                    _state = "Entity position updated";
+                }
+
+                var rot = Quaternion.Euler(0f, _entityComponent.RotationY, 0f);
+                if (Quaternion.Angle(_entityCapsule.transform.rotation, rot) > 0.01f)
+                {
+                    _entityCapsule.transform.rotation = rot;
+                    _state = "Entity rotation updated";
                 }
             }
         }
