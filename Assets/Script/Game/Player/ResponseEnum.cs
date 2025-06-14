@@ -43,6 +43,9 @@ namespace Script.Game.Player
         
         [EnumMember(Value = "Player Already In Game")]
         PlayerAlreadyInGame,
+        
+        [EnumMember(Value = "Ping")]
+        Ping,
     }
     
     public static class ResponseEnumExtensions
@@ -63,6 +66,7 @@ namespace Script.Game.Player
                 ResponseEnum.GameState => "Game State",
                 ResponseEnum.YourEntityIs => "Your Entity Is",
                 ResponseEnum.PlayerAlreadyInGame => "Player Already In Game",
+                ResponseEnum.Ping => "Ping",
                 _ => null
             };
         }

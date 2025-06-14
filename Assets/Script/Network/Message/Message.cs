@@ -5,6 +5,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using Script.Game.Core;
 using Script.Game.Entity;
+using Script.Network.Transport;
 using Script.Utils;
 
 
@@ -40,7 +41,9 @@ namespace Script.Network.Message
         public void Send()
         {
             _uuid = UuidManager.GetUuid();
-            _timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            //_timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            _timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() + TimeSync.TimeOffsetMs;
+
             MessageService.MessageSender?.SendMessage(this);
         }
         

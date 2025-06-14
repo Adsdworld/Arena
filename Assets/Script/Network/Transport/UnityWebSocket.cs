@@ -84,6 +84,9 @@ namespace Script.Network.Transport
                     return;
                 }
                 
+                long clientLocalTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+                TimeSync.TimeOffsetMs = response.Timestamp - clientLocalTime;
+                
                 // Appel du handler approprié
                 MainThreadDispatcher.Enqueue(() =>
                 {
