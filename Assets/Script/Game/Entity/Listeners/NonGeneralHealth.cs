@@ -47,6 +47,5 @@ namespace Script.Game.Entity.Listeners
                 healthBar.fillAmount = 0;
             }
         }
-
     }
 }

@@ -21,6 +21,7 @@ namespace Script.Game.handlers
             _handlers[ResponseEnum.GameState] = new GameState();
             _handlers[ResponseEnum.YourEntityIs] = new YourEntityIs();
             _handlers[ResponseEnum.GameNotFound] = new GameNotFound();
+            _handlers[ResponseEnum.Info] = new Info();
         }
 
         public static void HandleResponse(Response response)

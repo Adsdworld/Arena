@@ -50,6 +50,10 @@ namespace Script.Game.Entity.Listeners
 
         private bool HasAnimation(string animName)
         {
+            foreach (AnimationState state in animationComponent)
+            {
+                Log.Info("Animations name "+entityComponent.Id+": " + state.name);
+            }
             if (animName == "None") return false;
             foreach (AnimationState state in animationComponent)
             {
