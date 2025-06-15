@@ -34,10 +34,12 @@ namespace Script.Game.Entity.Listeners
 
             bool isLocal = "Entity_" + _entityComponent.Id == LocalPlayer.Instance.GetControlledEntityId();
             bool isDead = health <= 0;
-            canvasRoot.SetActive(!(isLocal || isDead));
-
-            if (isLocal) return;
-
+            //canvasRoot.SetActive(!(isLocal || isDead));
+            if (isLocal || isDead)
+            {
+                healthBar.fillAmount = 0;
+                return;
+            }
             if (maxHealth > 0)
             {
                 healthBar.fillAmount = Mathf.Clamp01(health / maxHealth);
