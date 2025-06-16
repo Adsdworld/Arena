@@ -12,22 +12,20 @@ namespace Script.Network.response
      */
     public class Response
     {
-        [JsonProperty("_uuid")]
+        [JsonProperty("uuid")]
         public string Uuid { get; set; }
 
-        [JsonProperty("_reponse")] public ResponseEnum Response_ { get; set; }
+        [JsonProperty("reponse")] public ResponseEnum Response_ { get; set; }
 
-        [JsonProperty("_gameName")] public GameNameEnum GameName { get; set; }
+        [JsonProperty("gameName")] public GameNameEnum GameName { get; set; }
+        
+        [JsonProperty("text")] public string Text { get; set; }
 
-        [JsonProperty("_ability")] public string Ability { get; set; }
+        [JsonProperty("notify")] public string Notify { get; set; }
         
-        [JsonProperty("_text")] public string Text { get; set; }
-
-        [JsonProperty("_notify")] public string Notify { get; set; }
+        [JsonProperty("livingEntities")] public List<LivingEntity> LivingEntities { get; set; }
         
-        [JsonProperty("_livingEntities")] public List<LivingEntity> LivingEntities { get; set; }
-        
-        [JsonProperty("_timestamp")] public long Timestamp { get; set; }
+        [JsonProperty("timestamp")] public long Timestamp { get; set; }
 
         public ResponseEnum GetResponse()
         {
