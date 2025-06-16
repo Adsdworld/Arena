@@ -15,7 +15,7 @@ namespace Script.Network.response
         [JsonProperty("uuid")]
         public string Uuid { get; set; }
 
-        [JsonProperty("reponse")] public ResponseEnum Response_ { get; set; }
+        [JsonProperty("response")] public ResponseEnum Response_ { get; set; }
 
         [JsonProperty("gameName")] public GameNameEnum GameName { get; set; }
         
